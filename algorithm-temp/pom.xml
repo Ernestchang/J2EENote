@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.bingoogol</groupId>
-	<artifactId>algorithm</artifactId>
+	<artifactId>algorithm-temp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>algorithm</name>
+	<name>algorithm-temp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
