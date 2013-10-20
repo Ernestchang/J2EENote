@@ -1,0 +1,9 @@
+.marks {
+	margin: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 14px;
+	background: url("../../images/layout/ico_coin.gif") no-repeat scroll
+		left center transparent;
+	color: rgb(203, 115, 0);
+	font: 10px/16px Helvetica, Tahoma, Arial, sans-serif;
+	margin-right: 30px;
+}
