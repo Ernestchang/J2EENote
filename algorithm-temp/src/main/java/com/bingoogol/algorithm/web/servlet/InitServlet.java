@@ -25,7 +25,7 @@ public class InitServlet extends HttpServlet {
 		// 初始化spring的工厂
 		wc = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		initChannel();
-		//initUser();
+		initUser();
 	}
 	
 	private void initUser() {

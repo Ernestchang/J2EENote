@@ -19,8 +19,8 @@ com/bingoogol/algorithm/dto/Json.class
 com/bingoogol/algorithm/util/MD5Util.class
 com/bingoogol/algorithm/dao/IUserAlgorithmDao.class
 com/bingoogol/algorithm/web/controller/QuestionController.class
-com/bingoogol/algorithm/dao/impl/UserAlgorithmDao.class
 com/bingoogol/algorithm/model/Comment.class
+com/bingoogol/algorithm/dao/impl/UserAlgorithmDao.class
 com/bingoogol/algorithm/service/IUserAlgorithmService.class
 com/bingoogol/algorithm/model/GenericBean.class
 com/bingoogol/algorithm/dao/impl/AlgorithmDao.class
@@ -44,5 +44,5 @@ com/bingoogol/algorithm/dao/impl/ChannelDao.class
 com/bingoogol/algorithm/dto/Pager.class
 com/bingoogol/algorithm/service/impl/UserService.class
 com/bingoogol/algorithm/web/controller/HomeController.class
-com/bingoogol/algorithm/dao/impl/UserDao.class
 com/bingoogol/algorithm/model/Question.class
+com/bingoogol/algorithm/dao/impl/UserDao.class
