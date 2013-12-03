@@ -1,0 +1,37 @@
+#pagetop {
+	width: 1000px;margin: 0 auto;padding: 0 10px;
+}
+#sitenav {
+	float: right;
+}
+#sitenav li {
+	font-size: 1.1em;float: left;line-height: 20px;display: block;height: 33px;padding: 0 25px;color: #ccc;
+}
+#pageheader {
+	height: 118px;padding: 0 20px;
+}
+#pageheader h1 {
+	display: block;font: normal 3.6em Arial, Helvetica, sans-serif!important;color: #000;text-shadow: #fff 1px 1px 1px;float: left;
+}
+#pageheader h1 span {
+	color: #aaa;
+}
+
+#content {
+	width: 1000px;margin: 0 auto;padding: 5px 5px;clear: both;
+}
+#sidebar {
+	float: left;width: 310px;padding-top: 5px;
+}
+#main {
+	width: 615px;float: right;
+}
+.marks {
+	margin: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 14px;
+	background: url("../../images/layout/ico_coin.gif") no-repeat scroll
+		left center transparent;
+	color: rgb(203, 115, 0);
+	font: 10px/16px Helvetica, Tahoma, Arial, sans-serif;
+	margin-right: 30px;
+}
