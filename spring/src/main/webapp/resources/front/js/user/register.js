@@ -11,7 +11,7 @@ $(function() {
 				required : true,
 				minlength : 6,
 				remote : {
-					url : ctx + "/user/vusername",
+					url : ctx + "/front/user/vusername",
 					type : "post"
 				}
 			},
@@ -28,7 +28,7 @@ $(function() {
 				required : true,
 				email : true,
 				remote : {
-					url : ctx + "/user/vemail",
+					url : ctx + "/front/user/vemail",
 					type : "post"
 				}
 			},
@@ -73,7 +73,7 @@ $(function() {
 		if (vRegisterForm.errorList.length == 0) {
 			$.post(window.location.href, $("#registerForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
-					window.location.href = ctx + "/front/user/activeui?id=" + ajaxObj.obj;
+					window.location.href = ctx + "/front/user/activeui?status=0&id=" + ajaxObj.obj;
 				} else {
 					$("#error").html(ajaxObj.msg);
 					$("#error_div").css("display", "block");
