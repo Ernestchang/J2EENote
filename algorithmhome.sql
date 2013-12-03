@@ -45,10 +45,10 @@ CREATE TABLE `algorithm` (
   KEY `fk_algorithm_thesis_idx` (`thesis`),
   KEY `fk_algorithm_iodata_idx` (`iodata`),
   KEY `fk_algorithm_code_idx` (`code`),
-  CONSTRAINT `fk_algorithm_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_algorithm_cid` FOREIGN KEY (`cid`) REFERENCES `channel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_algorithm_code` FOREIGN KEY (`code`) REFERENCES `attachment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_algorithm_iodata` FOREIGN KEY (`iodata`) REFERENCES `attachment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_algorithm_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_algorithm_thesis` FOREIGN KEY (`thesis`) REFERENCES `attachment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_algorithm_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -66,8 +66,8 @@ CREATE TABLE `algorithmuser` (
   `uid` varchar(36) NOT NULL,
   PRIMARY KEY (`aid`,`uid`),
   KEY `fk_algorithmuser_uid_idx` (`uid`),
-  CONSTRAINT `fk_algorithmuser_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_algorithmuser_aid` FOREIGN KEY (`aid`) REFERENCES `algorithm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_algorithmuser_aid` FOREIGN KEY (`aid`) REFERENCES `algorithm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_algorithmuser_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,10 +100,9 @@ DROP TABLE IF EXISTS `channel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `channel` (
-  `id` tinyint(4) NOT NULL COMMENT '主键自增长',
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT '主键自增长',
   `name` varchar(20) NOT NULL COMMENT '栏目名称',
   `level` tinyint(4) NOT NULL COMMENT '1表示一级栏目，2表示二级栏目，3表示三级栏目',
-  `moderator` varchar(36) DEFAULT NULL COMMENT '版主ID',
   `cid` tinyint(4) DEFAULT NULL COMMENT '父栏目ID',
   `mender` varchar(36) DEFAULT NULL COMMENT '修改者ID',
   `status` tinyint(4) NOT NULL COMMENT '1表示已删除，2表示可用',
@@ -111,11 +110,23 @@ CREATE TABLE `channel` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `fk_channel_cid_idx` (`cid`),
-  KEY `fk_channel_moderator_idx` (`moderator`),
   KEY `fk_channel_mender_idx` (`mender`),
   CONSTRAINT `fk_channel_cid` FOREIGN KEY (`cid`) REFERENCES `channel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_channel_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_channel_moderator` FOREIGN KEY (`moderator`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_channel_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `channeluser`
+--
+
+DROP TABLE IF EXISTS `channeluser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `channeluser` (
+  `uid` varchar(36) NOT NULL,
+  `cid` tinyint(4) NOT NULL,
+  PRIMARY KEY (`uid`,`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -140,8 +151,8 @@ CREATE TABLE `comment` (
   KEY `fk_comment_uid_idx` (`uid`),
   KEY `fk_comment_aid_idx` (`aid`),
   KEY `fk_comment_mender_idx` (`mender`),
-  CONSTRAINT `fk_comment_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_aid` FOREIGN KEY (`aid`) REFERENCES `algorithm` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -190,9 +201,9 @@ CREATE TABLE `message` (
   KEY `fk_message_sender_idx` (`sender`),
   KEY `fk_message_receiver_idx` (`receiver`),
   KEY `fk_message_mender_idx` (`mender`),
-  CONSTRAINT `fk_message_sender` FOREIGN KEY (`sender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_message_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_message_receiver` FOREIGN KEY (`receiver`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_message_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_message_sender` FOREIGN KEY (`sender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -241,9 +252,9 @@ CREATE TABLE `question` (
   KEY `fk_question_cid_idx` (`cid`),
   KEY `fk_question_mender_idx` (`mender`),
   KEY `fk_question_rid_idx` (`rid`),
-  CONSTRAINT `fk_question_rid` FOREIGN KEY (`rid`) REFERENCES `reply` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_question_cid` FOREIGN KEY (`cid`) REFERENCES `channel` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_question_mender` FOREIGN KEY (`mender`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_question_rid` FOREIGN KEY (`rid`) REFERENCES `reply` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_question_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -287,8 +298,8 @@ CREATE TABLE `user` (
   `username` varchar(20) NOT NULL COMMENT '用户名',
   `email` varchar(30) NOT NULL COMMENT '电子邮箱',
   `password` varchar(32) NOT NULL COMMENT '用username当作盐值，通过MD5算法加密',
-  `status` tinyint(4) NOT NULL COMMENT '1表示已删除，2表示禁用，3表示邮箱未激活，4表示可用',
-  `type` tinyint(4) NOT NULL COMMENT '1表示管理员，2表示版主，3表示注册用户',
+  `status` tinyint(4) NOT NULL DEFAULT '3' COMMENT '1表示已删除，2表示禁用，3表示邮箱未激活，4表示可用',
+  `type` tinyint(4) NOT NULL DEFAULT '3' COMMENT '1表示管理员，2表示版主，3表示注册用户',
   `createtime` datetime NOT NULL COMMENT '创建时间',
   `updatetime` datetime NOT NULL COMMENT '修改时间',
   `mender` varchar(36) DEFAULT NULL COMMENT '修改者ID',
@@ -314,7 +325,7 @@ CREATE TABLE `userinfo` (
   `expiretime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '激活码过期时间，时间戳，邮箱激活时判断激活码是否过期',
   `gold` tinyint(4) NOT NULL DEFAULT '5' COMMENT '用户拥有的金币，初始值是5',
   `cid` tinyint(4) NOT NULL COMMENT '所关注领域的ID',
-  `avatar` varchar(36) NOT NULL COMMENT '头像ID，外键关联attachment表',
+  `avatar` varchar(36) NOT NULL DEFAULT 'avatar' COMMENT '头像ID，外键关联attachment表',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_userinfo_cid_idx` (`cid`),
@@ -334,4 +345,4 @@ CREATE TABLE `userinfo` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-12-01 16:16:16
+-- Dump completed on 2013-12-03 23:18:16
