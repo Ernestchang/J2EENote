@@ -23,6 +23,7 @@
 				<li><a href="${pageContext.request.contextPath }/front/user/register">注册</a></li>
 			</c:if>
 			<c:if test="${!empty loginUser }">
+				<li><a href="${pageContext.request.contextPath }/front/algorithm/add">发布算法</a></li>
 				<li>${loginUser.username }</li>
 				<li><a href="${pageContext.request.contextPath }/auth/logout">退出</a></li>
 			</c:if>
