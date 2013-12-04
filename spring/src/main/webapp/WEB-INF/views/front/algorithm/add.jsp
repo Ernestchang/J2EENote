@@ -41,16 +41,42 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="attach" class="col-md-2 col-xs-2 control-label">附件</label>
-						<div class="col-md-7 col-xs-7" id="some_file_queue">
-							<input type="text" class="form-control" id="attach" name="attach" readonly="readonly" placeholder="附件"> <input type="hidden" class="form-control" id="key" name="key" value="">
+						<label for="summary" class="col-md-2 col-xs-2 control-label">算法简介</label>
+						<div class="col-md-9 col-xs-9">
+							<input type="text" class="form-control" id="summary" name="summary" placeholder="请填写算法简介">
 						</div>
-						<span id="file_upload"></span>
+					</div>
+					<div class="form-group">
+						<label for="author1" class="col-md-2 col-xs-2 control-label">第一作者</label>
+						<div class="col-md-9 col-xs-9">
+							<input type="text" class="form-control" id="author1" name="author1" placeholder="请填写第一作者">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="author2" class="col-md-2 col-xs-2 control-label">第二作者</label>
+						<div class="col-md-9 col-xs-9">
+							<input type="text" class="form-control" id="author2" name="author2" placeholder="请填写第三作者">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="author3" class="col-md-2 col-xs-2 control-label">第三作者</label>
+						<div class="col-md-9 col-xs-9">
+							<input type="text" class="form-control" id="author3" name="author3" placeholder="请填写第三作者">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="price" class="col-md-2 col-xs-2 control-label">算法价格</label>
+						<div class="col-md-3 col-xs-3">
+							<input type="text" class="form-control" id="price" value="5" name="price" readonly="readonly">
+						</div>
+						<div class="col-md-6 col-xs-6">
+							<input type="range"  id="pricerange" value="5" min="0" max="100" class="form-control" >
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="channel1" class="col-md-2 col-xs-2 control-label">所属学科</label>
 						<div class="col-md-3 col-xs-3">
-							<select id="channel1">
+							<select class="form-control" id="channel1">
 								<option value="" selected="selected">请选择一级学科</option>
 								<c:forEach items="${channels}" var="entry">
 									<option value="${entry.id }">${entry.name }</option>
@@ -58,15 +84,39 @@
 							</select>
 						</div>
 						<div class="col-md-3 col-xs-3">
-							<select id="channel2">
+							<select class="form-control" id="channel2">
 								<option value="">请选择二级学科</option>
 							</select>
 						</div>
 						<div class="col-md-3 col-xs-3">
-							<select id="cid" name="cid">
+							<select class="form-control" id="cid" name="cid">
 								<option value="">请选择三级学科</option>
 							</select>
 						</div>
+					</div>
+					<div class="form-group">
+						<label for="codeName" class="col-md-2 col-xs-2 control-label">算法源码</label>
+						<div class="col-md-7 col-xs-7" id="codeQueue">
+							<input type="text" class="form-control" id="codeName" name="codeName" readonly="readonly" placeholder="算法源码">
+							<input type="hidden" class="form-control" id="coeHash" name="codeHash" value="">
+						</div>
+						<span id="codeUpload"></span>
+					</div>
+					<div class="form-group">
+						<label for="iodataName" class="col-md-2 col-xs-2 control-label">输入输出</label>
+						<div class="col-md-7 col-xs-7" id="iodataQueue">
+							<input type="text" class="form-control" id="iodataName" name="iodataName" readonly="readonly" placeholder="输入输出">
+							<input type="hidden" class="form-control" id="iodataHash" name="iodataHash" value="">
+						</div>
+						<span id="iodataUpload"></span>
+					</div>
+					<div class="form-group">
+						<label for="thesisName" class="col-md-2 col-xs-2 control-label">论文</label>
+						<div class="col-md-7 col-xs-7" id="thesisQueue">
+							<input type="text" class="form-control" id="thesisName" name="thesisName" readonly="readonly" placeholder="论文">
+							<input type="hidden" class="form-control" id="thesisHash" name="thesisHash" value="">
+						</div>
+						<span id="thesisUpload"></span>
 					</div>
 					<div class="form-group">
 						<label for="vcode" class="col-md-2 col-xs-2 control-label">验证码</label>

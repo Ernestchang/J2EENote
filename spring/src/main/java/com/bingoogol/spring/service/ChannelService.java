@@ -31,7 +31,7 @@ public interface ChannelService {
 	public boolean isNameAvailable(String name);
 	/**
 	 * 根据父学科ID查询栏目，只返回id和name
-	 * @param cid
+	 * @param cid 父学科id，如果为-1则查询所有一级学科
 	 * @return
 	 */
 	public List<Map<String,Object>> selectChannel(int cid);

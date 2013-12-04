@@ -39,15 +39,19 @@ public class FrontAlgorithmController {
 	public @ResponseBody
 	String add() {
 		
-		return QiniuUtil.getUpToken();
+		return "";
 	}
 
-	@RequestMapping(value = "/getUpToken", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "/getPublicUpToken", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody
-	String getUpToken() {
-		String uptoken = QiniuUtil.getUpToken();
-		System.out.println("up:" + uptoken);
-		return uptoken;
+	String getPublicUpToken() {
+		return QiniuUtil.getPublicUpToken();
+	}
+	
+	@RequestMapping(value = "/getPrivateUpToken", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody
+	String getPrivateUpToken() {
+		return QiniuUtil.getPrivateUpToken();
 	}
 
 }

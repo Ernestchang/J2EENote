@@ -12,8 +12,10 @@ import com.qiniu.api.rs.URLUtils;
 
 public class QiniuUtil {
 	private static Mac mac = null;
-	private static String bucketName = null;
-	private static String domain = null;
+	private static String privateBucketName = null;
+	private static String privateDomain = null;
+	private static String publicBucketName = null;
+	private static String publicDomain = null;
 	private static int expires = 10;
 	static {
 		InputStream is = null;
@@ -23,8 +25,13 @@ public class QiniuUtil {
 			pp.load(is);
 			Config.ACCESS_KEY = pp.getProperty("ACCESS_KEY");
 			Config.SECRET_KEY = pp.getProperty("SECRET_KEY");
-			bucketName = pp.getProperty("bucketName");
-			domain = pp.getProperty("domain");
+
+			privateBucketName = pp.getProperty("privateBucketName");
+			privateDomain = pp.getProperty("privateDomain");
+
+			publicBucketName = pp.getProperty("publicBucketName");
+			publicDomain = pp.getProperty("publicDomain");
+
 			expires = Integer.parseInt(pp.getProperty("expires"));
 			mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
 		} catch (Exception e) {
@@ -40,14 +47,15 @@ public class QiniuUtil {
 			}
 		}
 	}
-	
+
 	/**
-	 * 获取上传令牌
+	 * 获取私有空间上传令牌
+	 * 
 	 * @return
 	 */
-	public static String getUpToken() {
+	public static String getPrivateUpToken() {
 		try {
-			PutPolicy putPolicy = new PutPolicy(bucketName);
+			PutPolicy putPolicy = new PutPolicy(privateBucketName);
 			putPolicy.returnBody = "{\"hash\":$(etag),\"name\":$(fname)}";
 			putPolicy.expires = expires;
 			return putPolicy.token(mac);
@@ -56,36 +64,73 @@ public class QiniuUtil {
 		}
 		return "";
 	}
-	
+
 	/**
-	 * 根据hash值，获取要在线预览文档的七牛路径
-	 * @param hash
+	 * 获取公开空间上传令牌
+	 * 
 	 * @return
 	 */
-	public static String getDocUrl(String hash) {
+	public static String getPublicUpToken() {
 		try {
-			String baseUrl = URLUtils.makeBaseUrl(domain, hash);
-			GetPolicy getPolicy = new GetPolicy();
-			getPolicy.expires = expires;
-			String fileUrl = getPolicy.makeRequest(baseUrl, mac);
-			// Google 文档查看器要求url是经过iso-8859-1编码的
-			fileUrl = URLEncoder.encode(fileUrl, "iso-8859-1");
-			return fileUrl;
+			PutPolicy putPolicy = new PutPolicy(publicBucketName);
+			putPolicy.returnBody = "{\"hash\":$(etag),\"name\":$(fname)}";
+			putPolicy.expires = expires;
+			return putPolicy.token(mac);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
-	public static String getDownloadUrl(String hash) {
+
+	/**
+	 * 根据hash值，获取要在线预览文档的七牛路径
+	 * 
+	 * @param hash
+	 * @return
+	 */
+	public static String getDocUrl(String hash) {
 		try {
-			String baseUrl = URLUtils.makeBaseUrl(domain, hash);
 			GetPolicy getPolicy = new GetPolicy();
-			getPolicy.expires = expires;
+			String baseUrl = URLUtils.makeBaseUrl(publicDomain, hash);
 			String fileUrl = getPolicy.makeRequest(baseUrl, mac);
 			// Google 文档查看器要求url是经过iso-8859-1编码的
-			fileUrl = URLEncoder.encode(fileUrl, "iso-8859-1");
-			return fileUrl;
+			return URLEncoder.encode(fileUrl, "iso-8859-1");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	/**
+	 * 获取私有文件下载地址
+	 * 
+	 * @param hash
+	 * @return
+	 */
+	public static String getPrivateDownloadUrl(String hash) {
+		try {
+			GetPolicy getPolicy = new GetPolicy();
+			String baseUrl = URLUtils.makeBaseUrl(privateDomain, hash);
+			getPolicy.expires = expires;
+			return getPolicy.makeRequest(baseUrl, mac);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	/**
+	 * 获取公有文件下载地址
+	 * 
+	 * @param hash
+	 * @return
+	 */
+	public static String getPublicDownloadUrl(String hash) {
+		try {
+			GetPolicy getPolicy = new GetPolicy();
+			String baseUrl = URLUtils.makeBaseUrl(publicDomain, hash);
+			getPolicy.expires = expires;
+			return getPolicy.makeRequest(baseUrl, mac);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

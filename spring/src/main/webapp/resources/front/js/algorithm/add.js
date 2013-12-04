@@ -1,29 +1,93 @@
 $(function() {
-	var ctx = $("#ctx").val();
+	var $ctx = $("#ctx").val();
+	var $codeUpload = $('#codeUpload');
+	var $iodataUpload = $('#iodataUpload');
+	var $thesisUpload = $('#thesisUpload');
+	var $channel2 = $("#channel2");
+	var $cid = $("#cid");
 
 	$("#vcodeimg").click(function() {
-		$(this).attr("src", ctx + "/verifycode/vcode?timestamp=" + new Date().getTime());
+		$(this).attr("src", $ctx + "/verifycode/vcode?timestamp=" + new Date().getTime());
 	});
 
-	$('#file_upload').uploadify({
+	$('#pricerange').on("change", function() {
+		$("#price").val($(this).val());
+	});
+
+	$codeUpload.uploadify({
 		'auto' : false,
 		'fileObjName' : 'file',
-		'buttonText' : '选择文件',
-		'queueID' : 'some_file_queue',
+		'buttonText' : '选择',
+		'queueID' : 'codeQueue',
 		'fileSizeLimit' : '10MB',
-		'swf' : ctx + '/resources/common/uploadify.swf',
+		'swf' : $ctx + '/resources/common/uploadify.swf',
 		'uploader' : 'http://up.qiniu.com/',
 		'onSelect' : function(file) {
-			$.get(ctx + "/front/algorithm/getUpToken", function(uptoken) {
-				$('#file_upload').uploadify('settings', 'formData', {
+			$.get($ctx + "/front/algorithm/getPrivateUpToken", function(uptoken) {
+				$codeUpload.uploadify('settings', 'formData', {
 					'token' : uptoken
 				});
-				$('#file_upload').uploadify('upload', '*');
+				$codeUpload.uploadify('upload', '*');
 			}, "text");
 		},
 		'onUploadSuccess' : function(file, data, response) {
 			var ajaxObj = $.parseJSON(data);
-			$("#attach").val(ajaxObj.name);
+			$("#codeName").val(ajaxObj.name);
+			$("#codeHash").val(ajaxObj.hash);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert(errorString);
+		},
+		'removeTimeout' : 1,
+		'fileTypeExts' : '*.*'
+	});
+	$iodataUpload.uploadify({
+		'auto' : false,
+		'fileObjName' : 'file',
+		'buttonText' : '选择',
+		'queueID' : 'iodataQueue',
+		'fileSizeLimit' : '10MB',
+		'swf' : $ctx + '/resources/common/uploadify.swf',
+		'uploader' : 'http://up.qiniu.com/',
+		'onSelect' : function(file) {
+			$.get($ctx + "/front/algorithm/getPrivateUpToken", function(uptoken) {
+				$iodataUpload.uploadify('settings', 'formData', {
+					'token' : uptoken
+				});
+				$iodataUpload.uploadify('upload', '*');
+			}, "text");
+		},
+		'onUploadSuccess' : function(file, data, response) {
+			var ajaxObj = $.parseJSON(data);
+			$("#iodataName").val(ajaxObj.name);
+			$("#iodataHash").val(ajaxObj.hash);
+		},
+		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+			alert(errorString);
+		},
+		'removeTimeout' : 1,
+		'fileTypeExts' : '*.*'
+	});
+	$thesisUpload.uploadify({
+		'auto' : false,
+		'fileObjName' : 'file',
+		'buttonText' : '选择',
+		'queueID' : 'thesisQueue',
+		'fileSizeLimit' : '10MB',
+		'swf' : $ctx + '/resources/common/uploadify.swf',
+		'uploader' : 'http://up.qiniu.com/',
+		'onSelect' : function(file) {
+			$.get($ctx + "/front/algorithm/getPublicUpToken", function(uptoken) {
+				$thesisUpload.uploadify('settings', 'formData', {
+					'token' : uptoken
+				});
+				$thesisUpload.uploadify('upload', '*');
+			}, "text");
+		},
+		'onUploadSuccess' : function(file, data, response) {
+			var ajaxObj = $.parseJSON(data);
+			$("#thesisName").val(ajaxObj.name);
+			$("#thesisHash").val(ajaxObj.hash);
 		},
 		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
 			alert(errorString);
@@ -60,7 +124,9 @@ $(function() {
 			}
 		}
 	});
+	
 	$("#addForm").submit(function() {
+		alert($("#thesisName").val());
 		if (vAddForm.errorList.length == 0) {
 			$.post(window.location.href, $("#addForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
@@ -73,15 +139,13 @@ $(function() {
 		}
 		return false;
 	});
-
-	var $channel2 = $("#channel2");
-	var $cid = $("#cid");
+	
 	$("#channel1").on("change", function() {
 		$("#channel2 option[value!='']").remove();
 		$("#cid option[value!='']").remove();
 		var channel1id = $(this).val();
 		if (channel1id != "") {
-			$.get(ctx + "/front/selectChannel/" + channel1id, function(ajaxObj) {
+			$.get($ctx + "/front/selectChannel/" + channel1id, function(ajaxObj) {
 				var channel2s = ajaxObj.obj;
 				for (var i = 0; i < channel2s.length; i++) {
 					var $option = $("<option></option>");
@@ -96,7 +160,7 @@ $(function() {
 		$("#cid option[value!='']").remove();
 		var channel2id = $(this).val();
 		if (channel2id != "") {
-			$.get(ctx + "/front/selectChannel/" + channel2id, function(ajaxObj) {
+			$.get($ctx + "/front/selectChannel/" + channel2id, function(ajaxObj) {
 				var channel3s = ajaxObj.obj;
 				for (var i = 0; i < channel3s.length; i++) {
 					var $option = $("<option></option>");
