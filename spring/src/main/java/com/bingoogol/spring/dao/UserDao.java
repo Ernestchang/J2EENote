@@ -16,9 +16,9 @@ public interface UserDao {
 	public int active(String id);
 	public Map<String, Object> login(UserLoginDto userLoginDto);
 	public int addUserInfo(String id, String activecode, Timestamp expiretime, int cid);
-	
-	public PagerJson  fenye(Pager pager);
 	public Map<String, Object> resendemail(String id);
 	public int updateActiveUserInfo(String id, String activecode, Timestamp expiretime);
+	public int getGold(String id);
 	
+	public PagerJson  fenye(Pager pager);
 }

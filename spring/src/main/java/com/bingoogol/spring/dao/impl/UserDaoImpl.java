@@ -74,4 +74,9 @@ public class UserDaoImpl implements UserDao {
 	public int updateActiveUserInfo(String id, String activecode, Timestamp expiretime) {
 		return jdbcTemplate.update("update userinfo set activecode=?,expiretime=? where id=?",activecode, expiretime, id);
 	}
+
+	@Override
+	public int getGold(String id) {
+		return jdbcTemplate.queryForObject("select gold from userinfo where id=?", Integer.class, id);
+	}
 }

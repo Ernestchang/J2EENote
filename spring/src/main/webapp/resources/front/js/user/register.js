@@ -11,7 +11,7 @@ $(function() {
 				required : true,
 				minlength : 6,
 				remote : {
-					url : ctx + "/front/user/vusername",
+					url : ctx + "/user/vusername",
 					type : "post"
 				}
 			},
@@ -28,7 +28,7 @@ $(function() {
 				required : true,
 				email : true,
 				remote : {
-					url : ctx + "/front/user/vemail",
+					url : ctx + "/user/vemail",
 					type : "post"
 				}
 			},
@@ -73,7 +73,7 @@ $(function() {
 		if (vRegisterForm.errorList.length == 0) {
 			$.post(window.location.href, $("#registerForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
-					window.location.href = ctx + "/front/user/activeui?status=0&id=" + ajaxObj.obj;
+					window.location.href = ctx + "/user/activeui?status=0&id=" + ajaxObj.obj;
 				} else {
 					$("#error").html(ajaxObj.msg);
 					$("#error_div").css("display", "block");
@@ -90,7 +90,7 @@ $(function() {
 		$("#cid option[value!='']").remove();
 		var channel1id = $(this).val();
 		if (channel1id != "") {
-			$.get(ctx + "/front/selectChannel/" + channel1id,function(ajaxObj) {
+			$.get(ctx + "/channel/select/" + channel1id,function(ajaxObj) {
 				var channel2s = ajaxObj.obj;
 				for ( var i = 0; i < channel2s.length; i++) {
 					var $option = $("<option></option>");
@@ -105,7 +105,7 @@ $(function() {
 		$("#cid option[value!='']").remove();
 		var channel2id = $(this).val();
 		if (channel2id != "") {
-			$.get(ctx + "/front/selectChannel/" + channel2id,function(ajaxObj) {
+			$.get(ctx + "/channel/select/" + channel2id,function(ajaxObj) {
 				var channel3s = ajaxObj.obj;
 				for ( var i = 0; i < channel3s.length; i++) {
 					var $option = $("<option></option>");

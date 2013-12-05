@@ -23,7 +23,7 @@ $(function() {
 		'swf' : $ctx + '/resources/common/uploadify.swf',
 		'uploader' : 'http://up.qiniu.com/',
 		'onSelect' : function(file) {
-			$.get($ctx + "/front/algorithm/getPrivateUpToken", function(uptoken) {
+			$.get($ctx + "/qiniu/auth/getPrivateUpToken", function(uptoken) {
 				$codeUpload.uploadify('settings', 'formData', {
 					'token' : uptoken
 				});
@@ -34,6 +34,7 @@ $(function() {
 			var ajaxObj = $.parseJSON(data);
 			$("#codeName").val(ajaxObj.name);
 			$("#codeHash").val(ajaxObj.hash);
+			$("#codeName").keyup();
 		},
 		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
 			alert(errorString);
@@ -50,7 +51,7 @@ $(function() {
 		'swf' : $ctx + '/resources/common/uploadify.swf',
 		'uploader' : 'http://up.qiniu.com/',
 		'onSelect' : function(file) {
-			$.get($ctx + "/front/algorithm/getPrivateUpToken", function(uptoken) {
+			$.get($ctx + "/qiniu/auth/getPrivateUpToken", function(uptoken) {
 				$iodataUpload.uploadify('settings', 'formData', {
 					'token' : uptoken
 				});
@@ -61,6 +62,7 @@ $(function() {
 			var ajaxObj = $.parseJSON(data);
 			$("#iodataName").val(ajaxObj.name);
 			$("#iodataHash").val(ajaxObj.hash);
+			$("#iodataName").keyup();
 		},
 		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
 			alert(errorString);
@@ -77,7 +79,7 @@ $(function() {
 		'swf' : $ctx + '/resources/common/uploadify.swf',
 		'uploader' : 'http://up.qiniu.com/',
 		'onSelect' : function(file) {
-			$.get($ctx + "/front/algorithm/getPublicUpToken", function(uptoken) {
+			$.get($ctx + "/qiniu/auth/getPublicUpToken", function(uptoken) {
 				$thesisUpload.uploadify('settings', 'formData', {
 					'token' : uptoken
 				});
@@ -88,6 +90,7 @@ $(function() {
 			var ajaxObj = $.parseJSON(data);
 			$("#thesisName").val(ajaxObj.name);
 			$("#thesisHash").val(ajaxObj.hash);
+			$("#thesisName").keyup();
 		},
 		'onUploadError' : function(file, errorCode, errorMsg, errorString) {
 			alert(errorString);
@@ -102,7 +105,26 @@ $(function() {
 				required : true,
 				minlength : 2
 			},
+			summary : {
+				required : true,
+				minlength : 15,
+				maxlength : 150
+			},
+			price : {
+				required : true,
+				min : 0,
+				max : 100
+			},
 			cid : {
+				required : true
+			},
+			codeName : {
+				required : true
+			},
+			iodataName : {
+				required : true
+			},
+			thesisName : {
 				required : true
 			},
 			vcode : {
@@ -115,8 +137,27 @@ $(function() {
 				required : "算法名不能为空",
 				minlength : "算法名至少为2位"
 			},
+			summary : {
+				required : "算法简介不能为空",
+				minlength : "算法简介至少有15字",
+				maxlength : "算法简介不能超过150字"
+			},
+			price : {
+				required : "算法价格不能为空",
+				min : "算法价格必须在0到100之间",
+				max : "算法价格必须在0到100之间"
+			},
 			cid : {
 				required : "请选择您关注的领域"
+			},
+			codeName : {
+				required : "请添加源码"
+			},
+			iodataName : {
+				required : "请添加输入输出数据"
+			},
+			thesisName : {
+				required : "请添加论文"
 			},
 			vcode : {
 				required : "验证码不能为空",
@@ -124,9 +165,8 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$("#addForm").submit(function() {
-		alert($("#thesisName").val());
 		if (vAddForm.errorList.length == 0) {
 			$.post(window.location.href, $("#addForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
@@ -139,13 +179,13 @@ $(function() {
 		}
 		return false;
 	});
-	
+
 	$("#channel1").on("change", function() {
 		$("#channel2 option[value!='']").remove();
 		$("#cid option[value!='']").remove();
 		var channel1id = $(this).val();
 		if (channel1id != "") {
-			$.get($ctx + "/front/selectChannel/" + channel1id, function(ajaxObj) {
+			$.get($ctx + "/channel/select/" + channel1id, function(ajaxObj) {
 				var channel2s = ajaxObj.obj;
 				for (var i = 0; i < channel2s.length; i++) {
 					var $option = $("<option></option>");
@@ -160,7 +200,7 @@ $(function() {
 		$("#cid option[value!='']").remove();
 		var channel2id = $(this).val();
 		if (channel2id != "") {
-			$.get($ctx + "/front/selectChannel/" + channel2id, function(ajaxObj) {
+			$.get($ctx + "/channel/select/" + channel2id, function(ajaxObj) {
 				var channel3s = ajaxObj.obj;
 				for (var i = 0; i < channel3s.length; i++) {
 					var $option = $("<option></option>");

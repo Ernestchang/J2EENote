@@ -48,7 +48,7 @@ $(function() {
 					}
 				} else {
 					if(ajaxObj.obj == 3) {
-						window.location.href = ctx + "/front/user/activeui?status=3&id=" + ajaxObj.msg;
+						window.location.href = ctx + "/user/activeui?status=3&id=" + ajaxObj.msg;
 					} else {
 						$("#error").html(ajaxObj.msg);
 						$("#error_div").css("display", "block");

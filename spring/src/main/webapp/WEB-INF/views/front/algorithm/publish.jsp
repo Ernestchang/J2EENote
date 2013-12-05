@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<label for="summary" class="col-md-2 col-xs-2 control-label">算法简介</label>
 						<div class="col-md-9 col-xs-9">
-							<input type="text" class="form-control" id="summary" name="summary" placeholder="请填写算法简介">
+							<textarea class="form-control" id="summary" name="summary" placeholder="请填写算法简介" rows="4"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -98,7 +98,7 @@
 						<label for="codeName" class="col-md-2 col-xs-2 control-label">算法源码</label>
 						<div class="col-md-7 col-xs-7" id="codeQueue">
 							<input type="text" class="form-control" id="codeName" name="codeName" readonly="readonly" placeholder="算法源码">
-							<input type="hidden" class="form-control" id="coeHash" name="codeHash" value="">
+							<input type="hidden" class="form-control" id="codeHash" name="codeHash" value="">
 						</div>
 						<span id="codeUpload"></span>
 					</div>
@@ -135,6 +135,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/common/js/bootstrap.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/common/js/jquery.validate.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/common/js/jquery.uploadify.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/front/js/algorithm/add.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/front/js/algorithm/publish.js"></script>
 </body>
 </html>

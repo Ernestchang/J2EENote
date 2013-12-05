@@ -22,7 +22,7 @@
 				<h3 class="panel-title">账户激活</h3>
 			</div>
 			<div class="panel-body">
-				${msg }<a href="${pageContext.request.contextPath }/front/user/resendemail/${id}">重新发送激活码</a>
+				${msg }<a href="${pageContext.request.contextPath }/user/resendemail/${id}">重新发送激活码</a>
 			</div>
 		</div>
 	</div>

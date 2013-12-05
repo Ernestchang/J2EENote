@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bingoogol.spring.dto.AjaxObj;
 import com.bingoogol.spring.dto.UserRegistDto;
-import com.bingoogol.spring.exception.BingoException;
+import com.bingoogol.spring.exception.IllegalClientException;
 import com.bingoogol.spring.service.ChannelService;
 import com.bingoogol.spring.service.UserService;
 
 @Controller
-@RequestMapping("/front/user")
-public class FrontUserController {
+@RequestMapping("/user")
+public class UserController {
 
 	@Resource
 	private UserService userService;
@@ -41,7 +41,7 @@ public class FrontUserController {
 		AjaxObj ajaxObj = new AjaxObj();
 		if (bindingResult.hasErrors()) {
 			// 此时没有通过浏览器表单正常提交（比如通过postman提交）或者浏览器js被禁用了
-			throw new BingoException("请通过正确的方式提交信息");
+			throw new IllegalClientException("请通过正确的方式提交信息");
 		}
 		if (!userRegistDto.getVcode().equalsIgnoreCase((String) session.getAttribute("vcode"))) {
 			ajaxObj.setSuccess(false);

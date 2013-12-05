@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bingoogol.spring.dao.UserDao;
+import com.bingoogol.spring.dao.UserInfoDao;
 import com.bingoogol.spring.dto.Pager;
 import com.bingoogol.spring.dto.PagerJson;
 import com.bingoogol.spring.dto.UserLoginDto;
 import com.bingoogol.spring.dto.UserRegistDto;
-import com.bingoogol.spring.exception.BingoException;
+import com.bingoogol.spring.exception.IllegalClientException;
 import com.bingoogol.spring.service.UserService;
 import com.bingoogol.spring.util.MailUtil;
 import com.bingoogol.spring.util.SecurityUtil;
@@ -27,7 +28,9 @@ import com.bingoogol.spring.util.SecurityUtil;
 public class UserServiceImpl implements UserService {
 	@Resource
 	private UserDao userDao;
-
+	@Resource
+	private UserInfoDao userInfoDao;
+	
 	@Override
 	public String register(UserRegistDto userRegistDto) {
 		if (isEmailAvailable(userRegistDto.getUsername()) && isEmailAvailable(userRegistDto.getEmail())) {
@@ -45,12 +48,12 @@ public class UserServiceImpl implements UserService {
 				return null;
 			} catch (NoSuchAlgorithmException e) {
 				// 加密错误
-				throw new BingoException("系统内部错误");
+				throw new IllegalClientException("系统内部错误");
 			} catch (MessagingException e) {
-				throw new BingoException("邮件发送失败");
+				throw new IllegalClientException("邮件发送失败");
 			}
 		} else {
-			throw new BingoException("没有通过浏览器注册");
+			throw new IllegalClientException("没有通过浏览器注册");
 		}
 	}
 
@@ -112,9 +115,26 @@ public class UserServiceImpl implements UserService {
 				return true;
 			}
 		} catch (EmptyResultDataAccessException e) {
-			throw new BingoException("没有通过浏览器注册");
+			throw new IllegalClientException("没有通过浏览器注册");
 		} catch (MessagingException e) {
 			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public int getGold(String id) {
+		try {
+			return userDao.getGold(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new IllegalClientException("没有通过浏览器注册");
+		}
+	}
+
+	@Override
+	public boolean buy(String buyerid, String sellerid, int price) {
+		if(userInfoDao.plusPrice(sellerid,price) + userInfoDao.minusPrice(buyerid,price) == 2) {
+			return true;
 		}
 		return false;
 	}

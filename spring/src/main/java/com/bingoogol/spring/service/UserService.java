@@ -21,4 +21,8 @@ public interface UserService {
 	public Map<String, Object> login(UserLoginDto userLoginDto);
 
 	public boolean resendemail(String id);
+	
+	public int getGold(String id);
+
+	public boolean buy(String buyerid, String sellerid, int price);
 }

@@ -34,13 +34,13 @@
 					<div class="form-group">
 						<label for="username" class="col-md-2 col-xs-2 control-label">用户名</label>
 						<div class="col-md-9 col-xs-9">
-							<input type="text" class="form-control" id="username" name="username" value="admin123" autofocus>
+							<input type="text" class="form-control" id="username" name="username" value="algorithmhome" autofocus>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="password" class="col-md-2 col-xs-2 control-label">密码</label>
 						<div class="col-md-9 col-xs-9">
-							<input type="password" class="form-control" id="password" name="password" value="123456">
+							<input type="password" class="form-control" id="password" name="password" value="algorithmhome">
 						</div>
 					</div>
 					<div class="form-group">

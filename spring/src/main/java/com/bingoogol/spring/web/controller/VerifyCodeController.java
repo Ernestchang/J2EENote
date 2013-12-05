@@ -36,7 +36,7 @@ public class VerifyCodeController {
 	}
 	
 	private String getVerifyCode() {
-		String codes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		String codes = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789";
 		int len = codes.length();
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < 4; i++) {

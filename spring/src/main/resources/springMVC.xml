@@ -19,10 +19,28 @@
 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="com.bingoogol.spring.exception.BingoException">common/error</prop>
+				<prop key="com.bingoogol.spring.exception.PrivilegeException">common/privilege</prop>
+				<prop key="com.bingoogol.spring.exception.IllegalClientException">common/illegalclient</prop>
 			</props>
 		</property>
 	</bean>
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/auth/**" />
+			<bean class="com.bingoogol.spring.web.interceptor.AuthInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/moderator/**" />
+			<bean class="com.bingoogol.spring.web.interceptor.ModeratorInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/admin/**" />
+			<bean class="com.bingoogol.spring.web.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
 	
 	<!-- Maps '/' requests to the 'index' view -->
 	<mvc:view-controller path="/" view-name="common/index" />

@@ -1,5 +1,6 @@
 package com.bingoogol.spring.util;
 
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,32 +13,50 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class MailUtil {
-	private static String targetSMTP = "smtp.126.com";
-	public static String username = "algorithmhome@126.com";
-	private static String password = "jsjyxxgcxy";
-
-	public static Session createSession() {
-		Properties properties = new Properties();
-		properties.put("mail.transport.protocol", "smtp");
-		properties.put("mail.smtp.host", targetSMTP);
-		properties.put("mail.smtp.auth", "true");// 链接认证
-		properties.put("mail.debug", "true");// 在控制台显示链接日志信息
-		properties.put("mail.stmp.timeout", 3000);// 在控制台显示链接日志信息
-		return Session.getInstance(properties);
+	public static String user;
+	private static String password;
+	private static String domain;
+	private static Properties pp = new Properties();
+	private static Properties properties = new Properties();
+	static {
+		InputStream is = null;
+		try {
+			is = MailUtil.class.getClassLoader().getResourceAsStream("mail.properties");
+			pp.load(is);
+			user = pp.getProperty("user");
+			password = pp.getProperty("password");
+			domain = pp.getProperty("domain");
+			properties.put("mail.transport.protocol", pp.getProperty("mail.transport.protocol"));
+			properties.put("mail.smtp.host", pp.getProperty("mail.smtp.host"));
+			properties.put("mail.smtp.auth", pp.getProperty("mail.smtp.auth"));
+			properties.put("mail.debug", pp.getProperty("mail.debug"));
+			properties.put("mail.stmp.timeout", pp.getProperty("mail.stmp.timeout"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (is != null) {
+					is.close();
+					is = null;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public static void sendMail(Session session, Message message) throws MessagingException {
 		Transport transport = session.getTransport();
-		transport.connect(username, password);
+		transport.connect(user, password);
 		transport.sendMessage(message, message.getAllRecipients());
 	}
 
 	public static void sendActiveLink(String to, String username, String id, String activecode) throws MessagingException {
 		// 1.创建与邮件服务器的链接会话
-		Session session = MailUtil.createSession();
+		Session session = Session.getInstance(properties);
 		// 2.通过session创建message邮件
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(MailUtil.username));
+		message.setFrom(new InternetAddress(MailUtil.user));
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 		message.setSubject("算法之家账户激活通知");
 		StringBuilder sb = new StringBuilder();
@@ -55,7 +74,7 @@ public class MailUtil {
 		sb.append("</style>");
 		sb.append("<div class='panel'>");
 		sb.append("<div class='panel-heading'><h3 class='panel-title'>算法之家账户激活通知</h3></div>");
-		sb.append("<div class='panel-body'>欢迎您注册算法之家，请点击右侧链接激活您的账号 " + username + "   <a href='http://localhost:7777/front/user/active/" + activecode + "/" + id + "' class='btn'>激活帐号</a></div>");
+		sb.append("<div class='panel-body'>欢迎您注册算法之家，请点击右侧链接激活您的账号 " + username + "   <a href='http://" + domain + "/user/active/" + activecode + "/" + id + "' class='btn'>激活帐号</a></div>");
 		sb.append("</div>");
 		MimeBodyPart content = new MimeBodyPart();
 		content.setContent(sb.toString(), "text/html;charset=utf-8");
@@ -69,10 +88,10 @@ public class MailUtil {
 
 	public static void sendActiveCode(String to, String activecode) throws MessagingException {
 		// 1.创建与邮件服务器的链接会话
-		Session session = MailUtil.createSession();
+		Session session = Session.getInstance(properties);
 		// 2.通过session创建message邮件
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(username));
+		message.setFrom(new InternetAddress(user));
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 		message.setSubject("算法之家账户激活");
 		message.setText("您的激活码是：" + activecode);
