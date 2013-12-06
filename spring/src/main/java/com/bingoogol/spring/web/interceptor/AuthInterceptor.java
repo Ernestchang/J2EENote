@@ -17,6 +17,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		Map<String, Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			response.sendRedirect(request.getContextPath() + "/login/login");
+			return false;
 		}
 		
 		return super.preHandle(request, response, handler);

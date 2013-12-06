@@ -24,6 +24,7 @@
 			</c:if>
 			<c:if test="${!empty loginUser }">
 				<li><a href="${pageContext.request.contextPath }/algorithm/auth/publish">发布算法</a></li>
+				<li><a href="${pageContext.request.contextPath }/user/auth/apply">申请版主</a></li>
 				<li>${loginUser.username }</li>
 				<li><a href="${pageContext.request.contextPath }/login/logout">退出</a></li>
 			</c:if>

@@ -2,6 +2,7 @@ package com.bingoogol.spring.service;
 
 import java.util.Map;
 
+import com.bingoogol.spring.dto.ApplyDto;
 import com.bingoogol.spring.dto.Pager;
 import com.bingoogol.spring.dto.PagerJson;
 import com.bingoogol.spring.dto.UserLoginDto;
@@ -25,4 +26,6 @@ public interface UserService {
 	public int getGold(String id);
 
 	public boolean buy(String buyerid, String sellerid, int price);
+	
+	public boolean apply(ApplyDto applyDto);
 }

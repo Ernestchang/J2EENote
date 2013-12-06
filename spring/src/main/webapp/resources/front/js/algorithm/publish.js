@@ -40,7 +40,7 @@ $(function() {
 			alert(errorString);
 		},
 		'removeTimeout' : 1,
-		'fileTypeExts' : '*.*'
+		'fileTypeExts' : '*.zip;*.rar'
 	});
 	$iodataUpload.uploadify({
 		'auto' : false,
@@ -68,7 +68,7 @@ $(function() {
 			alert(errorString);
 		},
 		'removeTimeout' : 1,
-		'fileTypeExts' : '*.*'
+		'fileTypeExts' : '*.zip;*.rar'
 	});
 	$thesisUpload.uploadify({
 		'auto' : false,
@@ -96,7 +96,7 @@ $(function() {
 			alert(errorString);
 		},
 		'removeTimeout' : 1,
-		'fileTypeExts' : '*.*'
+		'fileTypeExts' : '*.doc;*.docx;*.pdf'
 	});
 
 	var vAddForm = $("#addForm").validate({

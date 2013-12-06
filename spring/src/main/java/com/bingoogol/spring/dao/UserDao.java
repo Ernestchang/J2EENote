@@ -13,7 +13,8 @@ public interface UserDao {
 	public Long getCountByEmail(String email);
 	public int register(UserRegistDto userRegistDto);
 	public Map<String, Object> findUserInfoById(String id);
-	public int active(String id);
+	public int changeStatus(String id,int status);
+	public int changeType(String id,int type);
 	public Map<String, Object> login(UserLoginDto userLoginDto);
 	public int addUserInfo(String id, String activecode, Timestamp expiretime, int cid);
 	public Map<String, Object> resendemail(String id);

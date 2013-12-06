@@ -18,6 +18,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		Map<String,Object> loginUser = (Map<String, Object>)session.getAttribute("loginUser");
 		if(loginUser==null) {
 			response.sendRedirect(request.getContextPath()+"/login/login");
+			return false;
 		} else {
 			int type = (int) loginUser.get("type");
 			if(type != 1) {

@@ -36,8 +36,8 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int active(String id) {
-		return jdbcTemplate.update("update user set status=4 where status=3 and id=?", id);
+	public int changeStatus(String id, int status) {
+		return jdbcTemplate.update("update user set status=? where id=?", status, id);
 	}
 
 	@Override
@@ -72,11 +72,16 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updateActiveUserInfo(String id, String activecode, Timestamp expiretime) {
-		return jdbcTemplate.update("update userinfo set activecode=?,expiretime=? where id=?",activecode, expiretime, id);
+		return jdbcTemplate.update("update userinfo set activecode=?,expiretime=? where id=?", activecode, expiretime, id);
 	}
 
 	@Override
 	public int getGold(String id) {
 		return jdbcTemplate.queryForObject("select gold from userinfo where id=?", Integer.class, id);
+	}
+
+	@Override
+	public int changeType(String id, int type) {
+		return jdbcTemplate.update("update user set type=? where id=?", type, id);
 	}
 }

@@ -12,8 +12,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bingoogol.spring.dao.AttachmentDao;
+import com.bingoogol.spring.dao.ModeratorInfoDao;
 import com.bingoogol.spring.dao.UserDao;
 import com.bingoogol.spring.dao.UserInfoDao;
+import com.bingoogol.spring.dto.ApplyDto;
 import com.bingoogol.spring.dto.Pager;
 import com.bingoogol.spring.dto.PagerJson;
 import com.bingoogol.spring.dto.UserLoginDto;
@@ -30,6 +33,10 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	@Resource
 	private UserInfoDao userInfoDao;
+	@Resource
+	private AttachmentDao attachmentDao;
+	@Resource
+	private ModeratorInfoDao moderatorInfoDao;
 	
 	@Override
 	public String register(UserRegistDto userRegistDto) {
@@ -72,8 +79,9 @@ public class UserServiceImpl implements UserService {
 		try {
 			Map<String, Object> user = userDao.findUserInfoById(id);
 			if (user.get("activecode").equals(activecode) && new Timestamp(System.currentTimeMillis()).before((Timestamp) user.get("expiretime"))) {
-				userDao.active(id);
-				return true;
+				if(userDao.changeStatus(id, 4) == 1) {
+					return true;
+				}
 			}
 			return false;
 		} catch (EmptyResultDataAccessException e) {
@@ -136,6 +144,15 @@ public class UserServiceImpl implements UserService {
 		if(userInfoDao.plusPrice(sellerid,price) + userInfoDao.minusPrice(buyerid,price) == 2) {
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean apply(ApplyDto applyDto) {
+		applyDto.setApprove(UUID.randomUUID().toString());
+		attachmentDao.addAttachment(applyDto.getApprove(), applyDto.getApproveName(), applyDto.getApproveHash());
+		userDao.changeType(applyDto.getUid(), 2);
+		moderatorInfoDao.add(applyDto);
 		return false;
 	}
 }
