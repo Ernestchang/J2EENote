@@ -21,7 +21,7 @@ public class ModeratorInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		} else {
 			int type = (int) loginUser.get("type");
-			if(type != 2) {
+			if(type == 3) {
 				throw new PrivilegeException("您没有权限访问该功能");
 			}
 		}

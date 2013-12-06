@@ -14,7 +14,7 @@ public interface UserDao {
 	public int register(UserRegistDto userRegistDto);
 	public Map<String, Object> findUserInfoById(String id);
 	public int changeStatus(String id,int status);
-	public int changeType(String id,int type);
+	public int setUpdateInfo(String mender);
 	public Map<String, Object> login(UserLoginDto userLoginDto);
 	public int addUserInfo(String id, String activecode, Timestamp expiretime, int cid);
 	public Map<String, Object> resendemail(String id);
@@ -22,4 +22,5 @@ public interface UserDao {
 	public int getGold(String id);
 	
 	public PagerJson  fenye(Pager pager);
+	public int changeToModerator(String id, String mender);
 }

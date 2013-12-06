@@ -54,4 +54,17 @@ public class AlgorithmServiceImpl implements AlgorithmService {
 		return algorithmDao.list();
 	}
 
+	@Override
+	public List<Map<String, Object>> notvertifylist(String uid) {
+		return algorithmDao.notvertifylist(uid);
+	}
+
+	@Override
+	public boolean changeStatus(String id, String mender, int status) {
+		if(algorithmDao.changeStatus(id, mender,status) == 1) {
+			return true;
+		}
+		return false;
+	}
+
 }

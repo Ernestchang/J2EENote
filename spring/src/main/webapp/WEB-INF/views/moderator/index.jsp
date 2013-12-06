@@ -22,7 +22,7 @@
 			</div>
 			<div class="panel-body">
 				<ol>
-					<li><a href="${pageContext.request.contextPath }/user/users">用户列表</a></li>
+					<li><a href="${pageContext.request.contextPath }/algorithm/moderator/notvertifylist">查看未审核的算法列表</a></li>
 				</ol>
 			</div>
 		</div>

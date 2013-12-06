@@ -27,7 +27,7 @@
 				<div id="leftMenu">
 					<ul class="nav nav-pills nav-stacked navSelected">
 						<h4>学科管理</h4>
-						<li><a href="${pageContext.request.contextPath }/admin/channel/channels?cid=-1&level=1">学科管理</a></li>
+						<li><a href="${pageContext.request.contextPath }/channel/admin/channels?cid=-1&level=1">学科管理</a></li>
 					</ul>
 					<ul class="nav nav-pills nav-stacked">
 						<h4>用户管理</h4>
@@ -51,7 +51,7 @@
 							<tr>
 								<td>${entry.name }</td>
 								<td>${entry.mender }</td>
-								<td><a href="${pageContext.request.contextPath }/admin/channel/channels?level=2&cid=${entry.id}" class="btn btn-success btn-sm">管理子学科</a></td>
+								<td><a href="${pageContext.request.contextPath }/channel/admin/channels?level=2&cid=${entry.id}" class="btn btn-success btn-sm">管理子学科</a></td>
 								<td><button type="button" class="btn btn-warning btn-sm">修改</button></td>
 								<td><button type="button" class="btn btn-danger btn-sm">删除</button></td>
 							</tr>

@@ -48,7 +48,7 @@ public class AlgorithmController {
 		model.addAttribute("list", algorithmService.list());
 		return "front/algorithm/list";
 	}
-	
+
 	@RequestMapping(value = "/auth/publish", method = RequestMethod.GET)
 	public String publish(Model model) {
 		model.addAttribute("channels", channelService.selectChannel(-1));
@@ -60,7 +60,7 @@ public class AlgorithmController {
 	String publish(@Valid AddAlgorithmDto addAlgorithmDto, BindingResult bindingResult, HttpSession session) {
 		AjaxObj ajaxObj = new AjaxObj();
 		if (bindingResult.hasErrors()) {
-			for(ObjectError e : bindingResult.getAllErrors()) {
+			for (ObjectError e : bindingResult.getAllErrors()) {
 				System.out.println(e.getDefaultMessage());
 			}
 			// 此时没有通过浏览器表单正常提交（比如通过postman提交）或者浏览器js被禁用了
@@ -71,7 +71,7 @@ public class AlgorithmController {
 			ajaxObj.setMsg("验证码输入错误");
 		} else {
 			@SuppressWarnings("unchecked")
-			Map<String,Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
+			Map<String, Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
 			addAlgorithmDto.setUid((String) loginUser.get("id"));
 			if (algorithmService.addAlgorithm(addAlgorithmDto)) {
 				ajaxObj.setSuccess(true);
@@ -83,39 +83,61 @@ public class AlgorithmController {
 		}
 		return new JSONObject(ajaxObj).toString();
 	}
-	
+
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String detail(@PathVariable String id, Model model) {
-		Map<String,Object> algorithm = algorithmService.getAlgorithmById(id);
+		Map<String, Object> algorithm = algorithmService.getAlgorithmById(id);
 		String thesis = (String) algorithm.get("thesis");
 		String hash = attachmentService.getHashByid(thesis);
 		model.addAttribute("algorithm", algorithm);
 		model.addAttribute("docUrl", QiniuUtil.getDocUrl(hash));
 		return "front/algorithm/detail";
 	}
-	
+
 	@RequestMapping(value = "/auth/buy/{id}", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody
 	String buy(@PathVariable String id, HttpSession session) {
-		System.out.println("buy");
 		AjaxObj ajaxObj = new AjaxObj();
 		@SuppressWarnings("unchecked")
-		Map<String,Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
-		String buyerid = (String)loginUser.get("id");
+		Map<String, Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
+		String buyerid = (String) loginUser.get("id");
 		int gold = userService.getGold(buyerid);
-		Map<String,Object> algorithm = algorithmService.getAlgorithmById(id);
-		int price = (int)algorithm.get("price");
-		if(gold < price) {
+		Map<String, Object> algorithm = algorithmService.getAlgorithmById(id);
+		int price = (int) algorithm.get("price");
+		if (gold < price) {
 			ajaxObj.setSuccess(false);
 			ajaxObj.setMsg("对不起，您的金币不足");
 		} else {
 			String sellerid = (String) algorithm.get("uid");
-			if(userService.buy(buyerid,sellerid,price)) {
+			if (userService.buy(buyerid, sellerid, price)) {
 				ajaxObj.setSuccess(true);
-			}else {
+			} else {
 				ajaxObj.setSuccess(false);
 				ajaxObj.setMsg("对不起，购买失败，请重新购买");
 			}
+		}
+		return new JSONObject(ajaxObj).toString();
+	}
+
+	@RequestMapping(value = "/moderator/notvertifylist", method = RequestMethod.GET)
+	public String notvertifylist(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
+		Map<String, Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
+		String uid = (String) loginUser.get("id");
+		model.addAttribute("list", algorithmService.notvertifylist(uid));
+		return "moderator/algorithm/notvertifylist";
+	}
+
+	@RequestMapping(value = "/moderator/changeStatus/{id}/{status}", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String changeStatus(@PathVariable String id,@PathVariable int status, HttpSession session) {
+		AjaxObj ajaxObj = new AjaxObj();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
+		String mender = (String) loginUser.get("id");
+		if(algorithmService.changeStatus(id,mender,status)) {
+			ajaxObj.setSuccess(true);
+		} else {
+			ajaxObj.setSuccess(false);
 		}
 		return new JSONObject(ajaxObj).toString();
 	}

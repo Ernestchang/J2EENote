@@ -81,7 +81,12 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int changeType(String id, int type) {
-		return jdbcTemplate.update("update user set type=? where id=?", type, id);
+	public int setUpdateInfo(String mender) {
+		return jdbcTemplate.update("update user set mender=?,updatetime=? where id=?", mender, new Date(), mender);
+	}
+
+	@Override
+	public int changeToModerator(String id, String mender) {
+		return jdbcTemplate.update("update user set type=2,mender=?,updatetime=? where id=?", mender, new Date(), id);
 	}
 }

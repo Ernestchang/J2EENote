@@ -27,7 +27,7 @@
 				<div id="leftMenu">
 					<ul class="nav nav-pills nav-stacked navSelected">
 						<h4>学科管理</h4>
-						<li><a href="${pageContext.request.contextPath }/admin/channel/channels?cid=-1&level=1">学科管理</a></li>
+						<li><a href="${pageContext.request.contextPath }/channel/admin/channels?cid=-1&level=1">学科管理</a></li>
 					</ul>
 					<ul class="nav nav-pills nav-stacked">
 						<h4>用户管理</h4>

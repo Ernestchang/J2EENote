@@ -150,9 +150,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean apply(ApplyDto applyDto) {
 		applyDto.setApprove(UUID.randomUUID().toString());
-		attachmentDao.addAttachment(applyDto.getApprove(), applyDto.getApproveName(), applyDto.getApproveHash());
-		userDao.changeType(applyDto.getUid(), 2);
-		moderatorInfoDao.add(applyDto);
+		int i = attachmentDao.addAttachment(applyDto.getApprove(), applyDto.getApproveName(), applyDto.getApproveHash());
+		int j = userDao.setUpdateInfo(applyDto.getUid());
+		int k = moderatorInfoDao.add(applyDto);
+		if(i + k + j == 3) {
+			return true;
+		}
 		return false;
 	}
 }

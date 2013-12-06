@@ -22,4 +22,5 @@ public class ModeratorController {
 	public String index() {
 		return "moderator/index";
 	}
+	
 }

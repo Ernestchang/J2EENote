@@ -1,13 +1,9 @@
-package com.bingoogol.spring.dao;
+package com.bingoogol.spring.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.bingoogol.spring.dto.ApplyDto;
-
-public interface ModeratorInfoDao {
-
-	public int add(ApplyDto applyDto);
+public interface ModeratorInfoService {
 	/**
 	 * 查看未审核的版主
 	 * @return
@@ -20,6 +16,5 @@ public interface ModeratorInfoDao {
 	 * @param status 1表示待审核，2表示通过审核，3表示未通过审核
 	 * @return
 	 */
-	public int changeStatus(String id, int status);
-
+	public boolean changeStatus(String id, String mender, int status);
 }

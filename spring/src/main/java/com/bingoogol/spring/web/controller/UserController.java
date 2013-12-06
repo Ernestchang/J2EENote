@@ -138,12 +138,14 @@ public class UserController {
 				ajaxObj.setSuccess(true);
 			} else {
 				ajaxObj.setSuccess(false);
-				ajaxObj.setMsg("申请失败");
+				ajaxObj.setMsg("申请版主失败");
 			}
 			session.removeAttribute("vcode");
 		}
 		
 		return new JSONObject(ajaxObj).toString();
 	}
+	
+	
 
 }

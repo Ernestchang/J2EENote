@@ -18,19 +18,18 @@
 	<div class="container">
 		<ul class="list-inline">
 			<li>${loginUser.username }</li>
-			<li><a href="${pageContext.request.contextPath }/auth/logout">退出</a></li>
+			<li><a href="${pageContext.request.contextPath }/login/logout">退出</a></li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2">
 				<div id="leftMenu">
 					<ul class="nav nav-pills nav-stacked navSelected">
 						<h4>学科管理</h4>
-						<li><a href="${pageContext.request.contextPath }/admin/channel/channels?cid=-1&level=1">学科管理</a></li>
+						<li><a href="${pageContext.request.contextPath }/channel/admin/channels?cid=-1&level=1">学科管理</a></li>
 					</ul>
 					<ul class="nav nav-pills nav-stacked">
 						<h4>用户管理</h4>
-						<li><a href="#">版主管理</a></li>
-						<li><a href="#">注册用户管理</a></li>
+						<li><a href="${pageContext.request.contextPath }/moderatorinfo/admin/notvertifylist">未审核版主管理</a></li>
 					</ul>
 				</div>
 			</div>
