@@ -170,7 +170,7 @@ $(function() {
 		if (vAddForm.errorList.length == 0) {
 			$.post(window.location.href, $("#addForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
-					alert("发布成功");
+					window.location.href = $ctx + "/front/index";
 				} else {
 					$("#error").html(ajaxObj.msg);
 					$("#error_div").css("display", "block");

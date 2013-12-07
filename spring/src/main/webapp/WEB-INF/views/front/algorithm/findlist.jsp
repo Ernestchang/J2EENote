@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/common/inc/head.jsp"></jsp:include>
 <title>查找算法列表</title>
 </head>
-
 <body>
 	<jsp:include page="/WEB-INF/views/front/inc/header.jsp"></jsp:include>
 	<div class="container">

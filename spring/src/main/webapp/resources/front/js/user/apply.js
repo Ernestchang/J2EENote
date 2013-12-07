@@ -107,8 +107,7 @@ $(function() {
 		if (vApplyForm.errorList.length == 0) {
 			$.post(window.location.href, $("#applyForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
-					alert("申请成功");
-					console.log("申请成功");
+					window.location.href = $ctx + "/front/index";
 				} else {
 					alert("申请失败");
 					console.log("申请失败");
