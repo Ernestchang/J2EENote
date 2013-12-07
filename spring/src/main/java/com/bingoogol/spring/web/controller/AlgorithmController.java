@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bingoogol.spring.dto.AddAlgorithmDto;
 import com.bingoogol.spring.dto.AjaxObj;
+import com.bingoogol.spring.dto.Pager;
 import com.bingoogol.spring.exception.IllegalClientException;
 import com.bingoogol.spring.service.AlgorithmService;
 import com.bingoogol.spring.service.AttachmentService;
@@ -41,13 +43,6 @@ public class AlgorithmController {
 	private AttachmentService attachmentService;
 	@Resource
 	private UserService userService;
-
-	// TODO 临时的
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("list", algorithmService.list());
-		return "front/algorithm/list";
-	}
 
 	@RequestMapping(value = "/auth/publish", method = RequestMethod.GET)
 	public String publish(Model model) {
@@ -109,11 +104,16 @@ public class AlgorithmController {
 			ajaxObj.setMsg("对不起，您的金币不足");
 		} else {
 			String sellerid = (String) algorithm.get("uid");
-			if (userService.buy(buyerid, sellerid, price)) {
-				ajaxObj.setSuccess(true);
-			} else {
+			try {
+				if (userService.buy(id, buyerid, sellerid, price)) {
+					ajaxObj.setSuccess(true);
+				} else {
+					ajaxObj.setSuccess(false);
+					ajaxObj.setMsg("对不起，购买失败，请重新购买");
+				}
+			} catch (DuplicateKeyException e) {
 				ajaxObj.setSuccess(false);
-				ajaxObj.setMsg("对不起，购买失败，请重新购买");
+				ajaxObj.setMsg("对不起，您已经购买过该算法");
 			}
 		}
 		return new JSONObject(ajaxObj).toString();
@@ -129,12 +129,13 @@ public class AlgorithmController {
 	}
 
 	@RequestMapping(value = "/moderator/changeStatus/{id}/{status}", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public @ResponseBody String changeStatus(@PathVariable String id,@PathVariable int status, HttpSession session) {
+	public @ResponseBody
+	String changeStatus(@PathVariable String id, @PathVariable int status, HttpSession session) {
 		AjaxObj ajaxObj = new AjaxObj();
 		@SuppressWarnings("unchecked")
 		Map<String, Object> loginUser = (Map<String, Object>) session.getAttribute("loginUser");
 		String mender = (String) loginUser.get("id");
-		if(algorithmService.changeStatus(id,mender,status)) {
+		if (algorithmService.changeStatus(id, mender, status)) {
 			ajaxObj.setSuccess(true);
 		} else {
 			ajaxObj.setSuccess(false);
@@ -142,4 +143,21 @@ public class AlgorithmController {
 		return new JSONObject(ajaxObj).toString();
 	}
 
+	@RequestMapping(value = "/listchannel2/{id}", method = RequestMethod.GET)
+	public String listchannel2(@PathVariable int id, Model model) {
+		model.addAttribute("channel2s", algorithmService.listchannel2(id));
+		return "front/algorithm/listchannel2";
+	}
+
+	@RequestMapping(value = "/listchannel3/{id}", method = RequestMethod.GET)
+	public String listchannel3(@PathVariable int id, @Valid Pager pager, Model model) {
+		model.addAttribute("channel3s", algorithmService.listchannel3(pager, id));
+		return "front/algorithm/listchannel3";
+	}
+
+	@RequestMapping(value = "/find/{key}", method = RequestMethod.GET)
+	public String find(@PathVariable String key, @Valid Pager pager, Model model) {
+		model.addAttribute("findlist", algorithmService.find(pager, key));
+		return "front/algorithm/findlist";
+	}
 }

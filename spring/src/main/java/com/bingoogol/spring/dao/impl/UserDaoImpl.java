@@ -10,8 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bingoogol.spring.dao.UserDao;
-import com.bingoogol.spring.dto.Pager;
-import com.bingoogol.spring.dto.PagerJson;
 import com.bingoogol.spring.dto.UserLoginDto;
 import com.bingoogol.spring.dto.UserRegistDto;
 
@@ -53,16 +51,6 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int addUserInfo(String id, String activecode, Timestamp expiretime, int cid) {
 		return jdbcTemplate.update("insert into userinfo(id,activecode,expiretime,cid) values(?,?,?,?)", id, activecode, expiretime, cid);
-	}
-
-	@Override
-	public PagerJson fenye(Pager pager) {
-		PagerJson pagerJson = new PagerJson();
-		pagerJson.setMaxResult(pager.getRows());
-		pagerJson.setCurrentIndex(pager.getPage());
-		pagerJson.setRows(jdbcTemplate.queryForList("select * from user limit ?,?", (pager.getPage() - 1) * pager.getRows(), pager.getRows()));
-		pagerJson.setTotal(jdbcTemplate.queryForObject("select count(*) from user", Long.class));
-		return pagerJson;
 	}
 
 	@Override

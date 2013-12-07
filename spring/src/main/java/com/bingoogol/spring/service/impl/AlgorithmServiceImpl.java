@@ -8,14 +8,18 @@ import javax.annotation.Resource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bingoogol.spring.dao.AlgorithmDao;
 import com.bingoogol.spring.dao.AttachmentDao;
 import com.bingoogol.spring.dto.AddAlgorithmDto;
+import com.bingoogol.spring.dto.Pager;
+import com.bingoogol.spring.dto.PagerJson;
 import com.bingoogol.spring.exception.IllegalClientException;
 import com.bingoogol.spring.service.AlgorithmService;
 
 @Service
+@Transactional
 public class AlgorithmServiceImpl implements AlgorithmService {
 	@Resource
 	private AlgorithmDao algorithmDao;
@@ -44,14 +48,8 @@ public class AlgorithmServiceImpl implements AlgorithmService {
 		try {
 			return algorithmDao.getAlgorithmById(id);
 		} catch (EmptyResultDataAccessException e) {
-			System.err.println("getAlgorithmById");
 			throw new IllegalClientException("请通过正确的方式访问本网站");
 		}
-	}
-
-	@Override
-	public List<Map<String, Object>> list() {
-		return algorithmDao.list();
 	}
 
 	@Override
@@ -65,6 +63,27 @@ public class AlgorithmServiceImpl implements AlgorithmService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Map<String, Object>> listchannel2(int cid) {
+		return algorithmDao.listchannel2(cid);
+	}
+
+	@Override
+	public PagerJson listchannel3(Pager pager, int cid) {
+		if (pager.getPage() < 1) {
+			pager.setPage(1);
+		}
+		if (pager.getRows() < 1) {
+			pager.setRows(6);
+		}
+		return algorithmDao.listchannel3(pager, cid);
+	}
+
+	@Override
+	public PagerJson find(Pager pager, String key) {
+		return algorithmDao.find(pager, key);
 	}
 
 }

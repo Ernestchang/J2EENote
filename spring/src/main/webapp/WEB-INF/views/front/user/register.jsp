@@ -3,25 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${pageContext.request.contextPath }/resources/common/css/bootstrap.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/resources/common/css/bootstrap-theme.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/resources/common/css/common.css" rel="stylesheet" />
+<jsp:include page="/WEB-INF/views/common/inc/head.jsp"></jsp:include>
 <title>用户注册</title>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-        <script src="${pageContext.request.contextPath }/resources/common/js/html5shiv.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/common/js/respond.min.js"></script>
-<![endif]-->
-
-<style type="text/css">
-</style>
 </head>
 
 <body>
-	<input type="hidden" id="ctx" value="${pageContext.request.contextPath }" />
+	<jsp:include page="/WEB-INF/views/front/inc/header.jsp"></jsp:include>
 	<div class="container">
+		<jsp:include page="/WEB-INF/views/front/inc/logo.jsp"></jsp:include>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title text-center">用户注册</h3>
@@ -91,9 +80,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/common/js/jquery-2.0.3.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/common/js/bootstrap.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/common/js/jquery.validate.js"></script>
+	<jsp:include page="/WEB-INF/views/common/inc/foot.jsp"></jsp:include>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/front/js/user/register.js"></script>
 </body>
 </html>

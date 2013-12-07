@@ -6,12 +6,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bingoogol.spring.dao.ModeratorInfoDao;
 import com.bingoogol.spring.dao.UserDao;
 import com.bingoogol.spring.service.ModeratorInfoService;
 
 @Service
+@Transactional
 public class ModeratorInfoServiceImpl implements ModeratorInfoService {
 	@Resource
 	private ModeratorInfoDao moderatorInfoDao;

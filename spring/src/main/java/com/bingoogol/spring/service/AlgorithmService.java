@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.bingoogol.spring.dto.AddAlgorithmDto;
+import com.bingoogol.spring.dto.Pager;
+import com.bingoogol.spring.dto.PagerJson;
 
 
 
@@ -11,8 +13,6 @@ public interface AlgorithmService {
 	public boolean addAlgorithm(AddAlgorithmDto addAlgorithmDto);
 
 	public Map<String, Object> getAlgorithmById(String id);
-
-	public List<Map<String,Object>> list();
 
 	/**
 	 * 根据版主id查看该版主所管理板块下未审核的算法列表
@@ -29,4 +29,26 @@ public interface AlgorithmService {
 	 * @return
 	 */
 	public boolean changeStatus(String id, String mender, int status);
+	/**
+	 * 查询二级学科下下载次数前15的算法
+	 * @param cid
+	 * @return
+	 */
+	public List<Map<String,Object>> listchannel2(int cid);
+	
+	/**
+	 * 分页获取三级学科下面的算法
+	 * @param pager
+	 * @param cid
+	 * @return
+	 */
+	public PagerJson listchannel3(Pager pager, int cid);
+	
+	/**
+	 * 分页查找算法
+	 * @param pager
+	 * @param key
+	 * @return
+	 */
+	public PagerJson find(Pager pager, String key);
 }

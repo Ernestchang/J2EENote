@@ -12,13 +12,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bingoogol.spring.dao.AlgorithmUserDao;
 import com.bingoogol.spring.dao.AttachmentDao;
 import com.bingoogol.spring.dao.ModeratorInfoDao;
 import com.bingoogol.spring.dao.UserDao;
 import com.bingoogol.spring.dao.UserInfoDao;
 import com.bingoogol.spring.dto.ApplyDto;
-import com.bingoogol.spring.dto.Pager;
-import com.bingoogol.spring.dto.PagerJson;
 import com.bingoogol.spring.dto.UserLoginDto;
 import com.bingoogol.spring.dto.UserRegistDto;
 import com.bingoogol.spring.exception.IllegalClientException;
@@ -37,7 +36,9 @@ public class UserServiceImpl implements UserService {
 	private AttachmentDao attachmentDao;
 	@Resource
 	private ModeratorInfoDao moderatorInfoDao;
-	
+	@Resource
+	private AlgorithmUserDao algorithmUserDao;
+
 	@Override
 	public String register(UserRegistDto userRegistDto) {
 		if (isEmailAvailable(userRegistDto.getUsername()) && isEmailAvailable(userRegistDto.getEmail())) {
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			Map<String, Object> user = userDao.findUserInfoById(id);
 			if (user.get("activecode").equals(activecode) && new Timestamp(System.currentTimeMillis()).before((Timestamp) user.get("expiretime"))) {
-				if(userDao.changeStatus(id, 4) == 1) {
+				if (userDao.changeStatus(id, 4) == 1) {
 					return true;
 				}
 			}
@@ -100,26 +101,15 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 	}
-	
-	@Override
-	public PagerJson fenye(Pager pager) {
-		if (pager.getPage() < 1) {
-			pager.setPage(1);
-		}
-		if (pager.getRows() < 1) {
-			pager.setRows(6);
-		}
-		return userDao.fenye(pager);
-	}
 
 	@Override
 	public boolean resendemail(String id) {
 		try {
-			Map<String,Object> map = userDao.resendemail(id);
+			Map<String, Object> map = userDao.resendemail(id);
 			String activecode = UUID.randomUUID().toString();
 			Timestamp expiretime = new Timestamp(System.currentTimeMillis() + 1000 * 3600 * 24);
 			if (userDao.updateActiveUserInfo(id, activecode, expiretime) == 1) {
-				MailUtil.sendActiveLink((String)map.get("email"), (String)map.get("username"), id, activecode);
+				MailUtil.sendActiveLink((String) map.get("email"), (String) map.get("username"), id, activecode);
 				return true;
 			}
 		} catch (EmptyResultDataAccessException e) {
@@ -140,8 +130,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean buy(String buyerid, String sellerid, int price) {
-		if(userInfoDao.plusPrice(sellerid,price) + userInfoDao.minusPrice(buyerid,price) == 2) {
+	public boolean buy(String aid, String buyerid, String sellerid, int price) {
+		int i = userInfoDao.plusPrice(sellerid, price);
+		int j = userInfoDao.minusPrice(buyerid, price);
+		int k = algorithmUserDao.add(buyerid, aid);
+		if (i + k + j  == 3) {
 			return true;
 		}
 		return false;
@@ -153,7 +146,7 @@ public class UserServiceImpl implements UserService {
 		int i = attachmentDao.addAttachment(applyDto.getApprove(), applyDto.getApproveName(), applyDto.getApproveHash());
 		int j = userDao.setUpdateInfo(applyDto.getUid());
 		int k = moderatorInfoDao.add(applyDto);
-		if(i + k + j == 3) {
+		if (i + k + j == 3) {
 			return true;
 		}
 		return false;

@@ -6,12 +6,14 @@ import javax.annotation.Resource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bingoogol.spring.dao.AttachmentDao;
 import com.bingoogol.spring.exception.IllegalClientException;
 import com.bingoogol.spring.service.AttachmentService;
 
 @Service
+@Transactional
 public class AttachmentServiceImpl implements AttachmentService {
 	@Resource
 	private AttachmentDao attachmentDao;

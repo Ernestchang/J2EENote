@@ -1,12 +1,16 @@
 $(function() {
 	var ctx = $("#ctx").val();
+	$("#name").val("");
+	$('#addChannelModel').on("shown.bs.modal",function(e){
+		$("#name").focus();
+	});
 	var vAddChannelForm = $("#addChannelForm").validate({
 		rules : {
 			name : {
 				required : true,
 				minlength : 2,
 				remote : {
-					url : ctx + "/admin/channel/vname",
+					url : ctx + "/channel/admin/vname",
 					type : "post"
 				}
 			}
@@ -21,7 +25,7 @@ $(function() {
 	});
 	$("#addChannelForm").submit(function() {
 		if (vAddChannelForm.errorList.length == 0) {
-			$.post(ctx + "/admin/channel/add", $("#addChannelForm").serialize(), function(ajaxObj) {
+			$.post(ctx + "/channel/admin/add", $("#addChannelForm").serialize(), function(ajaxObj) {
 				if (ajaxObj.success) {
 					window.location.reload();
 					$('#addChannelModel').modal('hide');

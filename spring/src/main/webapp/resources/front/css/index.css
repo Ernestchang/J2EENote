@@ -1,0 +1,36 @@
+#leftMenu ul h4 {
+	color: #3a87ad;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.new-require time {
+	float: right;
+}
+
+.hero-unit li {
+	padding: 5px;
+	text-align: center;
+}
+.hero-unit li:first-of-type {
+	font-size: 18px;
+}
+.hero-unit strong {
+	color: red;
+	font-size: 18px;
+}
+.item p {
+	color: rgb(153, 153, 153);
+}
+.item time {
+	float: right;
+}
+
+.footer {
+	border-top: 1px solid #e5e5e5;
+	padding-top: 15px;
+}
+
+
