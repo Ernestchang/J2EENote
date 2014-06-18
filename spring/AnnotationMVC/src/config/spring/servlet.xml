@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<context:component-scan base-package="com.wh"></context:component-scan>
+	
+	<!-- 对org.springframework.web.servlet.view.UrlBasedViewResolver的扩展，加上了jsp和jstl的支持 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 
+		<property name="viewClass">已经有了默认值，不用配置</property>
+		 -->
+	    <property name="prefix" value="/WEB-INF/page/"></property>
+	    <property name="suffix" value=".jsp"></property>	    
+	</bean>
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/user/*"/>
+	        <bean class="com.wh.interceptor.MyInterceptor"></bean>
+	    </mvc:interceptor>
+	    <!-- 第二个 -->
+	</mvc:interceptors>
+	
+	<!-- id必须是messageResource -->
+	<bean id="messageResource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <property name="basename" value="mess"></property>
+	</bean>
+	
+	<!-- 配置多个国际化文件 -->
+<!-- 	<bean id="messageResource" class="org.springframework.context.support.ResourceBundleMessageSource"> -->
+<!-- 	    <property name="basenames"> -->
+<!-- 	        <list> -->
+<!-- 	            <value></value> -->
+<!-- 	            <value></value> -->
+<!-- 	            <value></value> -->
+<!-- 	        </list> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+	
+	
+</beans>

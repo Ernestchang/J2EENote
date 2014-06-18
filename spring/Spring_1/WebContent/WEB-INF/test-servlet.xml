@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="start.test">startController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="startController" class="controller.StartController"></bean> -->
+	 
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="login.test">loginController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+    <!-- 转到login.jsp -->
+<!-- 	<bean id="loginController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"> -->
+<!-- 	    <property name="viewName" value="login"></property> -->
+<!-- 	</bean> -->
+   	<!-- 不获取数据，只用来转发的,就是login.test中的login一样 -->
+<!-- 	<bean id="loginController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"></bean> -->
+	
+	
+	
+	
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="add_emp.test">addEmpController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="addEmpSuccessController" class="controller.EmpController"> -->
+<!-- 	    <property name="commandClass" value="bean.Emp"></property> -->
+<!-- 	</bean> -->
+	
+	
+	
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="add.test">addEmpController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="addEmpController" class="controller.EmpFormController"> -->
+<!-- 	    <property name="commandClass" value="bean.Emp"></property> -->
+<!-- 	    <property name="formView" value="add_emp"></property> -->
+<!-- 	    <property name="successView" value="success"></property> -->
+<!-- 	</bean> -->
+
+
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="to_add.test">addEmpController</prop> -->
+<!-- 				<prop key="add_emp.test">addEmpController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="addEmpController" class="controller.EmpMultiController"> -->
+<!-- 	    <property name="methodNameResolver"> -->
+<!-- 	        <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+	
+	
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="add.test">addEmpController</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="addEmpController" class="controller.EmpMultiController"> -->
+<!-- 	    <property name="methodNameResolver"> -->
+<!-- 	        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> -->
+<!-- 	            <property name="paramName" value="func"></property> -->
+<!-- 	        </bean> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+
+
+<!-- ////////////////////////////////////////////////////////// -->
+
+
+	<!-- empMulti/to_add.test -->
+<!-- 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean> -->
+<!-- 	<bean id="addEmpController" class="controller.EmpMultiController"> -->
+<!-- 	    <property name="methodNameResolver"> -->
+<!-- 	        <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+	
+	<!-- empMulti.test?func=to_add -->
+<!-- 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean> -->
+<!-- 	<bean id="addEmpController" class="controller.EmpMultiController"> -->
+<!-- 	    <property name="methodNameResolver"> -->
+<!-- 	        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> -->
+<!-- 	            <property name="paramName" value="func"></property> -->
+<!-- 	        </bean> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+	
+	
+<!-- ////////////////////////////////////////////////////////// -->
+
+	<!-- empMulti.test?func=to_add -->
+<!-- 	<bean class="org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping"></bean> -->
+<!-- 	<bean name="/add.test" class="controller.EmpMultiController"> -->
+<!-- 	    <property name="methodNameResolver"> -->
+<!-- 	        <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> -->
+<!-- 	            <property name="paramName" value="func"></property> -->
+<!-- 	        </bean> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+	
+	
+	
+	
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+	    <property name="prefix" value="/WEB-INF/jsp/"></property>
+	    <property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>

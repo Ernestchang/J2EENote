@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA" name="model" visibility="private">
+  <packagedElement xmi:type="uml:Class" xmi:id="_RlEOsJZ6EeK6KOEHCOCuKQ" name="BaseBean">
+    <ownedAttribute xmi:id="_lOXJgJZ6EeK6KOEHCOCuKQ" name="id" visibility="protected"/>
+    <ownedAttribute xmi:id="_lyvo8JZ6EeK6KOEHCOCuKQ" name="version" visibility="protected"/>
+    <ownedAttribute xmi:id="_r3TzcJZ6EeK6KOEHCOCuKQ" name="deleted" visibility="protected"/>
+    <ownedAttribute xmi:id="_x6sSMJZ6EeK6KOEHCOCuKQ" name="dateCreated" visibility="protected"/>
+    <ownedAttribute xmi:id="_J2wCsJZ7EeK6KOEHCOCuKQ" name="dateModified" visibility="protected"/>
+    <ownedOperation xmi:id="_MzSsUJZ7EeK6KOEHCOCuKQ" name="prePersist"/>
+    <ownedOperation xmi:id="_Q64MwJZ7EeK6KOEHCOCuKQ" name="preUpdate"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_gYz6YJZ7EeK6KOEHCOCuKQ" name="User">
+    <generalization xmi:id="_i5FewJZ7EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_wRJFAJZ7EeK6KOEHCOCuKQ" name="username" visibility="protected"/>
+    <ownedAttribute xmi:id="_wp0DsJZ7EeK6KOEHCOCuKQ" name="password" visibility="protected" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_odPq4JZ7EeK6KOEHCOCuKQ" name="Manager">
+    <generalization xmi:id="_IRV48Jv-EeK9o5mysLOuUA" general="_gYz6YJZ7EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_BxBU4JZ_EeK6KOEHCOCuKQ" name="privilegeGroups" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qW2Q0JZ7EeK6KOEHCOCuKQ" name="Customer">
+    <generalization xmi:id="_vI2AMJZ7EeK6KOEHCOCuKQ" general="_gYz6YJZ7EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_-JVV4Jv3EeK9o5mysLOuUA" name="orders"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_MiZ7MJZ8EeK6KOEHCOCuKQ" name="Order">
+    <generalization xmi:id="_XXvtEJZ8EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_ndDjwJZ8EeK6KOEHCOCuKQ" name="customer" visibility="private"/>
+    <ownedAttribute xmi:id="_xsPUkJZ8EeK6KOEHCOCuKQ" name="orderItems" visibility="private"/>
+    <ownedAttribute xmi:id="_j1NWgJaAEeK6KOEHCOCuKQ" name="state" visibility="private"/>
+    <ownedAttribute xmi:id="_PvaQ0JutEeKbfNcXPq0ztw" name="phone" visibility="private"/>
+    <ownedAttribute xmi:id="_QeDfgJutEeKbfNcXPq0ztw" name="address" visibility="private"/>
+    <ownedAttribute xmi:id="_UuCuAJutEeKbfNcXPq0ztw" name="receivername" visibility="private"/>
+    <ownedAttribute xmi:id="_0kRIkJyFEeKcEN15D_KNsA" name="totalPrice" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_N8proJZ8EeK6KOEHCOCuKQ" name="OrderItem">
+    <generalization xmi:id="_X7rgkJZ8EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_7WKcMJZ8EeK6KOEHCOCuKQ" name="product" visibility="private"/>
+    <ownedAttribute xmi:id="__c6PIJZ8EeK6KOEHCOCuKQ" name="amount" visibility="private"/>
+    <ownedAttribute xmi:id="_il_YcJuxEeKbfNcXPq0ztw" name="order"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_QUOnAJZ8EeK6KOEHCOCuKQ" name="Product">
+    <generalization xmi:id="_W5lxc5Z8EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_NYpKMJZ9EeK6KOEHCOCuKQ" name="name" visibility="private"/>
+    <ownedAttribute xmi:id="_wIP80JZ9EeK6KOEHCOCuKQ" name="price" visibility="private"/>
+    <ownedAttribute xmi:id="_GnRuoJZ-EeK6KOEHCOCuKQ" name="category" visibility="private"/>
+    <ownedAttribute xmi:id="_mjxHUJaoEeK6KOEHCOCuKQ" name="picture" visibility="private"/>
+    <ownedAttribute xmi:id="_vEWoUJaoEeK6KOEHCOCuKQ" name="description" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_32QxYJZ9EeK6KOEHCOCuKQ" name="Category">
+    <generalization xmi:id="_8QKJ05Z9EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_BsdacJZ-EeK6KOEHCOCuKQ" name="name" visibility="private"/>
+    <ownedAttribute xmi:id="_DvsdgJZ-EeK6KOEHCOCuKQ" name="parent"/>
+    <ownedAttribute xmi:id="_9iDkoJZ_EeK6KOEHCOCuKQ" name="childrens" visibility="private"/>
+    <ownedAttribute xmi:id="_hJeJYJusEeKbfNcXPq0ztw" name="products" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_cvFTQJZ-EeK6KOEHCOCuKQ" name="Privilege">
+    <generalization xmi:id="_u1amg5Z-EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_Yz9FAJZ_EeK6KOEHCOCuKQ" name="name" visibility="private"/>
+    <ownedAttribute xmi:id="_CSvQUJutEeKbfNcXPq0ztw" name="privilegeGroups" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_k-qj0JZ-EeK6KOEHCOCuKQ" name="PrivilegeGroup">
+    <generalization xmi:id="_sEG8g5Z-EeK6KOEHCOCuKQ" general="_RlEOsJZ6EeK6KOEHCOCuKQ"/>
+    <ownedAttribute xmi:id="_jY2nIJZ_EeK6KOEHCOCuKQ" name="name" visibility="private"/>
+    <ownedAttribute xmi:id="_mnYYoJZ_EeK6KOEHCOCuKQ" name="privileges" visibility="private"/>
+    <ownedAttribute xmi:id="_KarncJaBEeK6KOEHCOCuKQ" name="managers" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bp0JgJv-EeK9o5mysLOuUA" name="BuyCart">
+    <ownedAttribute xmi:id="_rcFvcJv-EeK9o5mysLOuUA" name="buyItems"/>
+    <ownedAttribute xmi:id="_wgwjMJv-EeK9o5mysLOuUA" name="name"/>
+    <ownedAttribute xmi:id="_PtTdUJyEEeKcEN15D_KNsA" name="phone" visibility="private"/>
+    <ownedAttribute xmi:id="_RK3AcJyEEeKcEN15D_KNsA" name="address" visibility="private"/>
+    <ownedOperation xmi:id="_XDN68JyEEeKcEN15D_KNsA" name="addBuyItem">
+      <ownedParameter xmi:id="_8B2w8JyEEeKcEN15D_KNsA" name="buyItem" type="_eQt6UJv-EeK9o5mysLOuUA"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ik4AQJyEEeKcEN15D_KNsA" name="deleteBuyItem">
+      <ownedParameter xmi:id="_C2aN8JyFEeKcEN15D_KNsA" name="buyItem" type="_eQt6UJv-EeK9o5mysLOuUA"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_nlOUsJyEEeKcEN15D_KNsA" name="deleteAll"/>
+    <ownedOperation xmi:id="_p7clMJyEEeKcEN15D_KNsA" name="getTotalPrice"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_eQt6UJv-EeK9o5mysLOuUA" name="BuyItem">
+    <ownedAttribute xmi:id="_mBP3YJv-EeK9o5mysLOuUA" name="product"/>
+    <ownedAttribute xmi:id="_op5UoJv-EeK9o5mysLOuUA" name="amount"/>
+  </packagedElement>
+</uml:Model>

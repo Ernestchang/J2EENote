@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="xml" extends="struts-default" >
+
+        <action name="getXmlAction" class="com.wh.action.xml.GetXmlAction" >
+        </action>
+    </package>
+    <!-- json-default是继承自struts-default -->
+    <package name="json" extends="json-default" >
+
+        <action name="getJsonAction" class="com.wh.action.json.GetJsonAction" >
+            <result name="success" type="json">
+                <param name="excludeProperties">date</param>
+                <param name="root">person</param>
+            </result>
+        </action>
+    </package>
+    <package name="gson" extends="struts-default" >
+
+        <action name="getGsonAction" class="com.wh.action.json.GetGsonAction" >
+        </action>
+    </package>
+
+</struts>

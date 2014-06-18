@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+.isShowLeftTable {
+	width: 6px;
+	height:100%;
+	border:1px #DCE3EB solid;
+	border-spacing:0px;
+	border-collapse:collapse;
+}
+.isShowLeftTable img {
+	cursor: pointer;
+}

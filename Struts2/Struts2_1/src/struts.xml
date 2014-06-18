@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 文件名后不要加properties 
+    <constant name="struts.custom.i18n.resources" value="message"></constant>-->
+	<constant name="struts.multipart.maxSize" value="1048576000"></constant>
+	<!--<include file="要引入的另一个配置文件，默认是在src目录下"></include>-->
+	<!--namespace起到命名空间分割的作用。通常将namaspace的属性值定义成页面所在的目录名。必须以/开头-->
+    <package name="struts2" extends="struts-default">
+    	<!-- 对于struts.xml文件的结果配置来说，局部要优于全局 -->
+    	<global-results>
+            <result name="usernameInvalid">/usernameInvalid.jsp</result>
+            <result name="passwordInvalid">/passwordInvalid.jsp</result>
+            <result name="login">/error.jsp</result>
+    	</global-results>
+    	<global-exception-mappings>
+        	<exception-mapping result="usernameInvalid" exception="com.wh.exception.UsernameException"></exception-mapping>
+        	<exception-mapping result="passwordInvalid" exception="com.wh.exception.PasswordException"></exception-mapping>
+    	</global-exception-mappings>
+        <action name="token" class="com.wh.struts2.TokenAction">
+            <result name="success">/token.jsp</result>
+            <!-- 名字invalid.token是确定的，表示一但表单重复提交了，就跳转到指定页面 -->
+            <result name="invalid.token">/tokenFail.jsp</result>
+            <interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        
+    </package>
+</struts>

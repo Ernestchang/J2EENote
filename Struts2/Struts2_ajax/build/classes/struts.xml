@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="xml" extends="struts-default">
+		<action name="getXMLAction" class="com.wh.action.xml.GetXMLAction"></action>
+	</package>
+	<package name="json" extends="json-default" namespace="/json">
+		<action name="getJSONAction1" class="com.wh.action.json.GetJSONLAction1"></action>
+		<action name="getJSONAction2" class="com.wh.action.json.GetJSONLAction2">
+			<result name="success" type="json">
+				<param name="excludeProperties">address</param>
+			</result>
+		</action>
+	</package>
+</struts>

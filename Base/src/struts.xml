@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="basic" extends="struts-default" namespace="/">
+        <!-- 
+        result-types?,interceptors?,default-interceptor-ref?,
+        default-action-ref?,default-class-ref?,global-results?,
+        global-exception-mappings?,action*
+         -->
+    	<interceptors>
+    		<interceptor name="permissionInterceptor" class="com.wh.base.web.interceptor.PermissionInterceptor"></interceptor>
+    		<!-- 自定义拦截器栈 -->
+    		<interceptor-stack name="myDefaultInterceptorStack">
+    			<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="myDefaultInterceptorStack"></default-interceptor-ref>
+    	<default-action-ref name="notFound"></default-action-ref>
+    	<!-- 定义默认的拦截器栈 -->
+        <global-results>
+            <result name="message">/WEB-INF/page/share/message.jsp</result>
+            <result name="login" type="redirect">/login.jsp</result>
+            <result name="invalid.token">mytoken.action</result>
+        </global-results>
+        <action name="mytoken" class="tokenAction"></action>
+        <action name="notFound">
+            <result name="success" type="redirect">/error/404.html</result>
+        </action>
+	    <action name="login" class="loginAction">
+			<result name="success" type="redirectAction">control/center/default.action</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<action name="code" class="codeAction"></action>
+		<action name="logout" class="logoutAction"></action>
+	</package>
+	<package name="control" extends="basic" namespace="/control/center">
+		<action name="default"><result name="success">/WEB-INF/page/controlcenter/default.jsp</result></action>
+		<action name="header"><result name="success">/WEB-INF/page/controlcenter/header.jsp</result></action>
+		<action name="menu"><result name="success">/WEB-INF/page/controlcenter/menu.jsp</result></action>
+		<action name="hidden"><result name="success">/WEB-INF/page/controlcenter/hidden.jsp</result></action>
+		<action name="content"><result name="success">/WEB-INF/page/controlcenter/content.jsp</result></action>
+		<action name="footer"><result name="success">/WEB-INF/page/controlcenter/footer.jsp</result></action>
+	</package>
+	<package name="user" extends="basic" namespace="/control/user">
+		<action name="addUserUI"><result name="success">/WEB-INF/page/user/addUser.jsp</result></action>
+		<action name="addUser" class="addUserAction">
+		</action>
+		<action name="editUserUI"><result name="success">/WEB-INF/page/user/editUser.jsp</result></action>
+		<action name="editUser" class="editUserAction"></action>
+		<action name="deleteUser" class="deleteUserAction"></action>
+		<action name="listUser" class="listUserAction">
+		    <result name="success">/WEB-INF/page/user/listUser.jsp</result>
+		</action>
+	</package>
+	<package name="message" extends="basic" namespace="/control/message">
+		<action name="addTopicalUI"><result name="success">/WEB-INF/page/message/addTopical.jsp</result></action>
+		<action name="listTopical" class="listTopicalAction">
+		    <result name="success">/WEB-INF/page/message/listTopical.jsp</result>
+		</action>
+		<action name="addTopical" class="addTopicalAction">
+		    <interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="myDefaultInterceptorStack"></interceptor-ref>
+		</action>
+	</package>
+</struts>

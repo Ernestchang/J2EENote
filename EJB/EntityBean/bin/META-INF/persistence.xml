@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<!-- transaction-type="JTA或RESOURCE_LOCAL",默认是JTA -->
+	<persistence-unit name="wanghao">
+		<!-- <jndi-name>MySqlDS</jndi-name>当数据源发布到jboss的时候，它的jndi名称默认是在java:这个命名空间中的 -->
+		<jta-data-source>java:MySqlDS</jta-data-source>
+		<!-- 设置JPA实现产品的属性 -->
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MessageDrivenBean" basedir=".">
+	<property name="src.dir" value="${basedir}\src" />
+	<!-- 系统变量 -->
+	<property environment="env" />
+	<property name="jboss.home" value="${env.JBOSS_HOME}" />
+	<!-- 发布方式 -->
+	<property name="jboss.server.config" value="default" />
+	<property name="build.dir" value="${basedir}\build" />
+	<path id="build.classpath">
+		<fileset dir="${jboss.home}\client">
+			<include name="*.jar" />
+		</fileset>
+		<!-- 编译后的class -->
+		<pathelement location="${build.dir}" />
+	</path>
+	<!-- 第一步定义工作 -->
+	<target name="prepare">
+		<!-- 删除目录 -->
+		<delete dir="${build.dir}" />
+		<!-- 创建目录 -->
+		<mkdir dir="${build.dir}" />
+	</target>
+	<!-- 第二步定义工作 -->
+		<target name="compile" depends="prepare" description="编译">
+			<!-- includes="cn/**"指定只编译以cn开头的这些包地下的类 -->
+			<javac srcdir="${src.dir}" destdir="${build.dir}" includes="cn/**">
+				<classpath refid="build.classpath" />
+			</javac>
+		</target>
+	<!-- 第三步定义工作 -->
+	<target name="ejbjar" depends="compile" description="创建EJB发布包">
+		<jar jarfile="${basedir}\${ant.project.name}.jar">
+			<fileset dir="${build.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</jar>
+	</target>
+	<!-- 第四步定义工作 -->
+	<target name="deploy" depends="ejbjar" description="发布EJB">
+		<copy file="${basedir}\${ant.project.name}.jar" todir="${jboss.home}\server\${jboss.server.config}\deploy" />
+	</target>
+	<!-- 第五步定义工作 -->
+	<target name="undeploy" description="卸载EJB">
+		<delete file="${jboss.home}\server\${jboss.server.config}\deploy\${ant.project.name}.jar" />
+	</target>
+</project>

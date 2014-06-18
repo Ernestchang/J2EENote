@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.2//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<!-- 字段优先校验器 -->
+	<!-- 
+	<field name="username">
+		<field-validator type="requiredstring">
+			<message>username cant't be blank!</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">4</param>
+			<param name="maxLength">6</param>
+			 -->
+			<!-- 
+			<message>length of username should be between ${minLength} and ${maxLength}</message>
+			 -->
+			 <!--
+			<message key="username.invalid"></message>
+		</field-validator>
+	</field>
+	<field name="password">
+		<field-validator type="requiredstring">
+			<message>password cant't be blank!</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">4</param>
+			<param name="maxLength">6</param>
+			<message>length of password should be between ${minLength} and ${maxLength}</message>
+		</field-validator>
+	</field>
+	<field name="age">
+		<field-validator type="required">
+			<message>age cant't be blank!</message>
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">10</param>
+			<param name="max">40</param>
+			<message>age should be between ${min} and ${max}</message>
+		</field-validator>
+	</field>
+	<field name="birthday">
+		<field-validator type="required">
+			<message>birthday cant't be blank!</message>
+		</field-validator>
+		<field-validator type="date">
+			<param name="min">2005-1-1</param>
+			<param name="max">2007-12-31</param>
+			<message>birthday should be between ${min} and ${max}</message>
+		</field-validator>
+	</field>
+	 -->
+	 <!-- 校验器优先校验器 -->
+	 <validator type="requiredstring">
+	 	<param name="fieldName">username</param>
+	 	<message>username can't be blank!</message>
+	 </validator>
+	 <validator type="stringlength">
+	 	<param name="fieldName">username</param>
+	 	<param name="minLength">4</param>
+	 	<param name="maxLength">6</param>
+	 	<message>length of username should be between ${minLength} and ${maxLength}</message>
+	 </validator>
+</validators>

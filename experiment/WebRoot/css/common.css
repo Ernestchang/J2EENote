@@ -1,0 +1,431 @@
+@charset "utf-8";
+@import "jquery.ui.all.css";
+
+* {
+	margin:0px;
+	padding:0px;
+}
+body {
+	font-family:"宋体";
+	font-size:12px;
+	background-image:url(../images/body_bg.png);
+	background-repeat:repeat-x;
+}
+
+a {
+	color:blue;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+select {
+	width:120px;
+	border:1px #CCCCCC solid;
+}
+select:hover {
+	border:1px #999999 solid;
+	background-color: #FFFFEE;
+}
+.odd {
+	background-color:#FEF2E8;
+}
+.even {
+	background-color:#D8FCFF;
+}
+
+#common_submit {
+	background-image:url('../images/common_submit.png');
+	width:83px;
+	height:31px;
+}
+#common_reset {
+	background-image:url('../images/common_reset.png');
+	width:83px;
+	height:31px;
+	margin-left: 40px;
+}
+#query_button {
+	background-image:url('../images/common_query.png');
+	width:83px;
+	height:31px;
+	margin-top: 5px;
+	margin-left: 670px;
+}
+#download {
+	background-image:url('../images/common_download.png');
+	width:154px;
+	height:33px;
+	margin:20px auto;
+}
+#download,#query_button,#common_submit,#common_reset {
+	
+	background-repeat:no-repeat;
+	border:0px;
+}
+#download:hover,#query_button:hover,#common_submit:hover,#common_reset:hover {
+	cursor:pointer;
+}
+
+/*顶部*/
+.common_top {
+	width:960px;
+	height:90px;
+	margin:auto;
+	background-image:url(../images/common_top.png);
+	background-repeat:no-repeat;
+	border:0px;
+}
+
+/*底部*/
+.common_bottom {
+	border:0px;
+	height:50px;
+	margin:0px auto;
+	text-align:center;
+}
+.common_bottom td {
+	border:0px;
+}
+
+/*中部*/
+.common_center {
+	width:960px;
+	height:510px;
+	margin:0px auto;
+}
+/*左部,总宽度199px*/
+.common_left {
+	width:197px;
+	height:508px;
+	border:1px silver solid;
+	float:left;
+}
+
+/*欢迎信息,总高度108px*/
+.common_welcome {
+	width:197px;
+	height:107px;
+	border-bottom:1px silver solid;
+}
+.common_welcome ul {
+    font-size:14px;
+	list-style:none;
+	text-align:center;
+	line-height:25px;
+}
+
+/*菜单部分*/
+.common_menu {
+	width:197px;
+	height:400px;
+}
+.common_menu div {
+	width:150px;
+	height:auto;
+	margin-left:25px;
+	margin-top:5px;
+}
+.common_menu span {
+	font-size:14px;
+}
+.common_menu ul {
+	width:100px;
+	margin-top:5px;
+	margin-left:48px;
+	list-style:none;
+	line-height:20px;
+	list-style-image:url(../images/common_li.gif);
+}
+
+
+/*右部,总宽度761px*/
+.common_right {
+	width:760px;
+	height:508px;
+	border:1px silver solid;
+	border-left:0px;	
+	float:right;	
+}
+
+/*当前位置，共高38px*/
+.common_position {
+	font-size:14px;
+	width:760px;
+	height:37px;
+	border-bottom:1px silver solid;
+}
+.common_position ul li {
+	list-style-type: none;
+	list-style-image:url(../images/common_home.png);
+	list-style-position:inside;
+	position:relative;
+	left:10px;
+	top:10px; 
+}
+
+/*显示内容部分*/
+.common_content {
+	width:760px;
+	height:470px;
+	position:relative;
+}
+
+/*搜索部分样式，高共40px*/
+.query_div {
+	height:39px;
+	width:760px;
+	position:relative;
+	border-bottom:1px silver solid;
+}
+.query_div span {
+	position:absolute;
+	top:10px;
+}
+.query_div select {
+	margin-left:5px;
+}
+
+/*显示项目列名信息*/
+.query_title {
+	position:relative;
+	left:40px;
+	width:660px;
+	height:29px;
+	border-collapse:collapse;
+	border-spacing:0px;
+}
+.query_title th {
+	border:1px silver solid;
+	border-top:0px;
+}
+
+/*中间收缩页面产生滚动条部分*/
+.query_overflow {
+	width:677px;
+	height:400px;
+	position:relative;
+	left:40px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+/*项目列表*/
+.query_overflow table {
+	width:660px;
+	height:auto;
+	border-spacing:0px;
+	border-collapse:collapse;
+}
+.query_overflow tr td{
+	line-height:25px;
+	text-align:center;
+	border:1px silver solid;
+	border-top:0px;
+}
+.query_overflow tr td:first-child  {
+	text-align:left;
+	padding-left:20px;
+}
+.query_overflow tr:hover {
+	background-color:#F5F8EB;
+}
+
+/*中间不搜索页面，但是产生滚动条部分*/
+.noquery_overflow {
+	width:760px;
+	height:470px;
+	position:relative;
+	overflow-x:hidden;
+	overflow-y:auto;
+	position:relative;
+}
+
+/*显示项目信息*/
+.experiment_detail {
+	width:auto;
+	height:auto;
+	position:relative;
+	left:20px;
+	top:10px;
+	border-collapse:collapse;
+	text-align:center;
+}
+.experiment_detail th,td {
+	border:1px silver solid;
+	line-height:30px;
+}
+.experiment_detail span {
+	display:block;
+	width:100%;
+	height:100%;
+	overflow-x:hidden;
+	overflow-y:auto;
+	letter-spacing:2px;
+	text-align:left;
+	line-height:18px;
+}
+.download_div {
+	position:relative;
+	left:20px;
+	width:700px;
+	text-align: center;
+}
+/*显示评审信息*/
+.estimate_detail {
+	position:relative;
+	left:20px;
+	width:700px;
+	height:auto;
+	border-collapse:collapse;
+	text-align: center;
+}
+
+.estimate_table {
+	position:relative;
+	left:20px;
+	width:700px;
+	height:auto;
+	border-collapse:collapse;
+	text-align: center;
+}
+.estimate_table textarea {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border:0px;
+	resize: none;
+	float: left;
+}
+
+.distribute_table {
+	position:relative;
+	left:20px;
+	width:700px;
+	height:auto;
+	border-collapse:collapse;
+	text-align: center;
+}
+.distribute_table table {
+	border-collapse:collapse;
+	text-align: center;
+	border:0px;
+	width:100%;
+	height:auto;
+	overflow-y:auto; 
+	overflow-x:hidden;
+}
+.distribute_table table tr {
+	height:25px;
+	border:0px;
+	border-right: 1px silver solid;
+}
+
+/*添加实验项目表格*/
+.add_table {
+	width: 600px;
+	height: auto;
+	margin: 20px auto;
+	border-collapse: collapse;
+	border: 1px silver solid;
+}
+.add_table td {
+	line-height: 30px;
+	text-align: left;
+	border: 1px silver solid;
+	padding-left: 10px;
+}
+.add_table td textarea {
+	width: 350px;
+	height: 100px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	resize: none;
+	float: left;
+}
+#addForm label.error {
+	margin-left: 30px;
+	width: auto;
+	display: inline;
+	color: red;
+	font-style: italic;
+}
+/*输入框样式*/
+.add_input {
+	border:1px #CCCCCC solid;
+}
+.add_input:hover {
+	border:1px #999999 solid;
+	background-color: #FFFFEE;
+}
+
+
+
+/************************************************主页********************************************/
+/*顶部*/
+.index_top {
+	background-image:url(../images/index_top.png);
+	background-repeat:no-repeat;
+	width:960px;
+	height:100px;
+	margin:0px auto;
+}
+
+/*中部*/
+.index_center {
+	background-image:url(../images/index_center.png);
+	background-repeat:no-repeat;
+	width:960px;
+	height:500px;
+	margin:0px auto;
+	position:relative;
+}
+/*登陆信息*/
+#index_username,#index_password {
+	position:absolute;
+	left:688px;
+	top:203px;
+	width:120px;
+	height:17px;
+	border:1px #CCCCCC solid;
+}
+#index_username:hover,#index_password:hover {
+	border:1px #999999 solid;
+	background-color: #FFFFEE;
+}
+#index_username {
+	top:203px;
+}
+#index_password {
+	top:245px;
+}
+/*单选按钮*/
+.index_radio {
+	position:absolute;
+	left:635px;
+	top:290px;
+	border:0px;
+}
+/*提交,重置按钮*/
+.index_submit,.index_reset {
+	width:110px;
+	height:40px;
+	position:absolute;
+	background-color:#D3D8E5;
+	top:340px;
+	cursor:pointer;
+	border:0px;
+}
+.index_submit:hover,.index_reset:hover {
+	cursor:pointer;
+	border:0px;
+}
+.index_submit {
+	background-image:url(../images/index_submit.png);
+	left:640px;
+}
+.index_reset {
+	background-image:url(../images/index_reset.png);
+	left:770px;
+}

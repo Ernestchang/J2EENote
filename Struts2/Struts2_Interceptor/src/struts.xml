@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="bingo" extends="struts-default">
+        
+        <interceptors>
+    		<interceptor name="interceptor1" class="com.wh.web.interceptor.Interceptor1">
+    		    <!-- 使用的时候赋的值会把定义时赋的值覆盖掉 -->
+    		    <param name="test">hello</param>
+    		</interceptor>
+    		<interceptor name="permissionInterceptor" class="com.wh.web.interceptor.PermissionInterceptor"></interceptor>
+    		<interceptor name="interceptor3" class="com.wh.web.interceptor.Interceptor3"></interceptor>
+    		
+    		<!-- 自定义拦截器栈 -->
+    		<interceptor-stack name="myDefaultInterceptorStack">
+    			<interceptor-ref name="interceptor1"></interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<!-- 定义默认的拦截器栈 -->
+    	<!-- 
+    	<default-interceptor-ref name="myDefaultInterceptorStack"></default-interceptor-ref>
+    	 -->
+    	 <global-results>
+            <result name="login" type="redirect">/login.jsp</result>
+        </global-results>
+    	 <action name="login" class="com.wh.web.action.LoginAction">
+    	     <result name="input">/login.jsp</result>
+    	     <result name="success">/result.jsp</result>
+    	     <interceptor-ref name="interceptor1">
+            	<param name="test">world</param>
+             </interceptor-ref>
+             <!-- 
+			    一旦定义了自己的拦截器，将其配置到action上后，我们需要在action的最后加上默认的拦截器栈：defaultStack
+			 -->
+             <interceptor-ref name="defaultStack"></interceptor-ref>
+    	 </action>
+    	 <action name="testpermission" class="com.wh.web.action.TestPermissionAction">
+    	     <result name="success">/permission.jsp</result>
+             <interceptor-ref name="permissionInterceptor"></interceptor-ref>
+             <interceptor-ref name="interceptor3">
+                 <!-- 
+            		在方法过滤拦截器中，如果既没有指定includeMethods参数，也没有指定execludeMethods参数
+            		那么所有的方法都会被拦截，也就是说所有的方法都被认为是includeMethods的，如果只指定了includeMethods
+            		那么就只会拦截includeMethods中的方法，没有包含在includeMethods中的方法就不会被拦截,
+            		如果不指定includeMethods，只指定execludeMethods，所有的方法都会被拦截
+            	 -->
+            	<!-- 拦截执行（拦截器的代码是否执行，而不是目标方法执不执行） -->
+            	<param name="includeMethods"></param>
+            	<!-- 拦截器不拦截（拦截器的代码是否执行，而不是目标方法执不执行）-->
+            	<param name="execudeMethods">myExecute</param>
+             </interceptor-ref>
+             <interceptor-ref name="defaultStack"></interceptor-ref>
+    	 </action>
+    </package>
+</struts>

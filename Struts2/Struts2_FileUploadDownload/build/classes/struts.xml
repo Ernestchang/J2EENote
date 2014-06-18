@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="bingo" extends="struts-default">
+        <!-- 上传单个文件 -->
+        <action name="upload1" class="com.wh.web.struts.upload.UploadAction1">
+        	<result name="success">/upload/result1.jsp</result>
+        </action>
+        <!-- 上传指定数量的文件 -->
+        <action name="upload2" class="com.wh.web.struts.upload.UploadAction2">
+        	<result name="success">/upload/result2.jsp</result>
+        	<!-- 当不符合时配置的条件时（包括上传文件大小限制和上传文件类型限制等），会自动跳转到input试图 -->
+        	<result name="input">/upload/upload2.jsp</result>
+        	<interceptor-ref name="fileUpload">
+        	    <!-- 不是限定总和，是限定每一个上传的文件都不能超过 -->
+        	    <param name="maximumSize">409600</param>
+        	    <!-- 到tomcat配置文件web.xml中查找文件类型 -->
+        	    <param name="allowedTypes">image/png</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <!-- 自定义上传数量 -->
+        <action name="upload3" class="com.wh.web.struts.upload.UploadAction3">
+        	<result name="success">/upload/result3.jsp</result>
+        </action>
+        <!-- 文件下载1 -->
+        <action name="download" class="com.wh.web.struts.download.DownloadAction">
+            <!-- 
+            protected String contentType = "text/plain";
+            protected String contentLength;
+            protected String contentDisposition = "inline";  //表示文件的名字
+            protected String inputName = "inputStream";
+            protected InputStream inputStream;
+             -->
+        	<result name="success" type="stream">
+        		<param name="contentType">image/png</param>
+        		<!-- 
+        		filename是固定的
+        		private String fileName;
+        		 -->
+        		<param name="contentDisposition">attachment;filename=${fileName}</param>
+        		<!-- 
+        		public InputStream getDownloadFile() {
+					return ServletActionContext.getServletContext().getResourceAsStream("/upload/commons-beanutils-1.8.3-bin.zip");
+				}
+        		 -->
+        		<param name="inputName">downloadFile</param>
+        	</result>
+        </action>
+    </package>
+</struts>

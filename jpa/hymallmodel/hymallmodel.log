@@ -1,0 +1,134 @@
+[INFO][2013-03-24 10:46:33,574][org.hibernate.annotations.common.Version]HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+[INFO][2013-03-24 10:46:33,580][org.hibernate.Version]HHH000412: Hibernate Core {4.1.9.Final}
+[INFO][2013-03-24 10:46:33,583][org.hibernate.cfg.Environment]HHH000206: hibernate.properties not found
+[INFO][2013-03-24 10:46:33,584][org.hibernate.cfg.Environment]HHH000021: Bytecode provider name : javassist
+[INFO][2013-03-24 10:46:33,833][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000402: Using Hibernate built-in connection pool (not for production use!)
+[INFO][2013-03-24 10:46:33,838][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000115: Hibernate connection pool size: 20
+[INFO][2013-03-24 10:46:33,838][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000006: Autocommit mode: true
+[INFO][2013-03-24 10:46:33,838][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000401: using driver [org.gjt.mm.mysql.Driver] at URL [jdbc\:mysql\://localhost\:3306/hymallmodel?useUnicode\=true&characterEncoding\=UTF-8]
+[INFO][2013-03-24 10:46:33,839][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000046: Connection properties: {user=root, password=****, autocommit=true, release_mode=auto}
+[WARN][2013-03-24 10:46:33,857][org.hibernate.engine.jdbc.internal.JdbcServicesImpl]HHH000342: Could not obtain connection to query metadata : No suitable driver found for jdbc\:mysql\://localhost\:3306/hymallmodel?useUnicode\=true&characterEncoding\=UTF-8
+[INFO][2013-03-24 10:46:33,863][org.hibernate.dialect.Dialect]HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+[INFO][2013-03-24 10:46:33,869][org.hibernate.engine.jdbc.internal.LobCreatorBuilder]HHH000422: Disabling contextual LOB creation as connection was null
+[INFO][2013-03-24 10:46:33,879][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator]HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory
+[INFO][2013-03-24 10:46:33,882][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory]HHH000397: Using ASTQueryTranslatorFactory
+[INFO][2013-03-24 10:46:34,060][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000228: Running hbm2ddl schema update
+[INFO][2013-03-24 10:46:34,060][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000102: Fetching database metadata
+[ERROR][2013-03-24 10:46:34,061][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000319: Could not get database metadata
+java.sql.SQLException: No suitable driver found for jdbc\:mysql\://localhost\:3306/hymallmodel?useUnicode\=true&characterEncoding\=UTF-8
+	at java.sql.DriverManager.getConnection(DriverManager.java:602)
+	at java.sql.DriverManager.getConnection(DriverManager.java:154)
+	at org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:193)
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1750)
+	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:94)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:905)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:890)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:57)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47)
+	at test.Test.setUpBeforeClass(Test.java:13)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+[ERROR][2013-03-24 10:46:34,062][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000299: Could not complete schema update
+java.sql.SQLException: No suitable driver found for jdbc\:mysql\://localhost\:3306/hymallmodel?useUnicode\=true&characterEncoding\=UTF-8
+	at java.sql.DriverManager.getConnection(DriverManager.java:602)
+	at java.sql.DriverManager.getConnection(DriverManager.java:154)
+	at org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:193)
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:503)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1750)
+	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:94)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:905)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:890)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:57)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47)
+	at test.Test.setUpBeforeClass(Test.java:13)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+[INFO][2013-03-24 10:47:18,391][org.hibernate.annotations.common.Version]HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+[INFO][2013-03-24 10:47:18,396][org.hibernate.Version]HHH000412: Hibernate Core {4.1.9.Final}
+[INFO][2013-03-24 10:47:18,398][org.hibernate.cfg.Environment]HHH000206: hibernate.properties not found
+[INFO][2013-03-24 10:47:18,400][org.hibernate.cfg.Environment]HHH000021: Bytecode provider name : javassist
+[INFO][2013-03-24 10:47:18,663][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000402: Using Hibernate built-in connection pool (not for production use!)
+[INFO][2013-03-24 10:47:18,668][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000115: Hibernate connection pool size: 20
+[INFO][2013-03-24 10:47:18,668][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000006: Autocommit mode: true
+[INFO][2013-03-24 10:47:18,669][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000401: using driver [org.gjt.mm.mysql.Driver] at URL [jdbc:mysql://localhost:3306/hymallmodel?useUnicode=true&characterEncoding=UTF-8]
+[INFO][2013-03-24 10:47:18,669][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000046: Connection properties: {user=root, password=****, autocommit=true, release_mode=auto}
+[INFO][2013-03-24 10:47:18,927][org.hibernate.dialect.Dialect]HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+[INFO][2013-03-24 10:47:18,945][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator]HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory
+[INFO][2013-03-24 10:47:18,950][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory]HHH000397: Using ASTQueryTranslatorFactory
+[INFO][2013-03-24 10:47:19,121][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000228: Running hbm2ddl schema update
+[INFO][2013-03-24 10:47:19,121][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000102: Fetching database metadata
+[INFO][2013-03-24 10:47:19,122][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000396: Updating schema
+[INFO][2013-03-24 10:47:19,124][java.sql.DatabaseMetaData]HHH000262: Table not found: tb_hymall_user
+[INFO][2013-03-24 10:47:19,125][java.sql.DatabaseMetaData]HHH000262: Table not found: tb_hymall_user
+[INFO][2013-03-24 10:47:19,577][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000232: Schema update complete
+[INFO][2013-03-24 11:56:42,932][org.hibernate.annotations.common.Version]HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+[INFO][2013-03-24 11:56:42,938][org.hibernate.Version]HHH000412: Hibernate Core {4.1.9.Final}
+[INFO][2013-03-24 11:56:42,940][org.hibernate.cfg.Environment]HHH000206: hibernate.properties not found
+[INFO][2013-03-24 11:56:42,942][org.hibernate.cfg.Environment]HHH000021: Bytecode provider name : javassist
+[INFO][2013-03-24 11:56:43,290][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000402: Using Hibernate built-in connection pool (not for production use!)
+[INFO][2013-03-24 11:56:43,295][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000115: Hibernate connection pool size: 20
+[INFO][2013-03-24 11:56:43,295][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000006: Autocommit mode: true
+[INFO][2013-03-24 11:56:43,295][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000401: using driver [org.gjt.mm.mysql.Driver] at URL [jdbc:mysql://localhost:3306/hymallmodel?useUnicode=true&characterEncoding=UTF-8]
+[INFO][2013-03-24 11:56:43,295][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000046: Connection properties: {user=root, password=****, autocommit=true, release_mode=auto}
+[INFO][2013-03-24 11:56:43,564][org.hibernate.dialect.Dialect]HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+[INFO][2013-03-24 11:56:43,585][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator]HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory
+[INFO][2013-03-24 11:56:43,589][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory]HHH000397: Using ASTQueryTranslatorFactory
+[INFO][2013-03-24 11:56:43,766][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000228: Running hbm2ddl schema update
+[INFO][2013-03-24 11:56:43,766][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000102: Fetching database metadata
+[INFO][2013-03-24 11:56:43,769][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000396: Updating schema
+[INFO][2013-03-24 11:56:43,771][java.sql.DatabaseMetaData]HHH000262: Table not found: tb_user
+[INFO][2013-03-24 11:56:43,772][java.sql.DatabaseMetaData]HHH000262: Table not found: tb_user
+[INFO][2013-03-24 11:56:43,813][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000232: Schema update complete
+[INFO][2013-03-24 12:03:52,523][org.hibernate.annotations.common.Version]HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+[INFO][2013-03-24 12:03:52,529][org.hibernate.Version]HHH000412: Hibernate Core {4.1.9.Final}
+[INFO][2013-03-24 12:03:52,531][org.hibernate.cfg.Environment]HHH000206: hibernate.properties not found
+[INFO][2013-03-24 12:03:52,533][org.hibernate.cfg.Environment]HHH000021: Bytecode provider name : javassist
+[INFO][2013-03-24 12:03:52,824][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000402: Using Hibernate built-in connection pool (not for production use!)
+[INFO][2013-03-24 12:03:52,829][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000115: Hibernate connection pool size: 20
+[INFO][2013-03-24 12:03:52,829][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000006: Autocommit mode: true
+[INFO][2013-03-24 12:03:52,829][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000401: using driver [org.gjt.mm.mysql.Driver] at URL [jdbc:mysql://localhost:3306/hymallmodel?useUnicode=true&characterEncoding=UTF-8]
+[INFO][2013-03-24 12:03:52,829][org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl]HHH000046: Connection properties: {user=root, password=****, autocommit=true, release_mode=auto}
+[INFO][2013-03-24 12:03:53,058][org.hibernate.dialect.Dialect]HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+[INFO][2013-03-24 12:03:53,078][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator]HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory
+[INFO][2013-03-24 12:03:53,081][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory]HHH000397: Using ASTQueryTranslatorFactory
+[INFO][2013-03-24 12:03:53,277][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000228: Running hbm2ddl schema update
+[INFO][2013-03-24 12:03:53,277][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000102: Fetching database metadata
+[INFO][2013-03-24 12:03:53,279][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000396: Updating schema
+[INFO][2013-03-24 12:03:53,282][java.sql.DatabaseMetaData]HHH000262: Table not found: tb_user
+[INFO][2013-03-24 12:03:53,284][java.sql.DatabaseMetaData]HHH000262: Table not found: tb_user
+[INFO][2013-03-24 12:03:53,323][org.hibernate.tool.hbm2ddl.SchemaUpdate]HHH000232: Schema update complete
