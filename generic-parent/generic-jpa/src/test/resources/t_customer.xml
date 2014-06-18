@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<t_customer id="1" username="user1" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="2" username="user2" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="3" username="user3" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="4" username="user4" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="5" username="user5" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="6" username="user6" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="7" username="user7" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="8" username="user8" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="9" username="user9" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="10" username="user10" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+	<t_customer id="11" username="user11" password="123456" version="1" visible="1" date_modified="2013-08-28" date_created="2013-08-28" />
+</dataset>

@@ -1,0 +1,22 @@
+<deployment xmlns="http://xml.apache.org/axis/wsdd/"
+            xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+    <!--java org.apache.axis.client.AdminClient -l http://localhost:8080/myaxis/servlet/AxisServlet handler.wsdd
+-->
+    <!-- 声明处理器 -->
+    <handler name="track" type="java:com.bingoogol.axisserver.handler.LogHandler">
+        <parameter name="filename" value="/home/bingo/HandlerService.log"/>
+    </handler>
+
+    <!-- 声明服务 -->
+    <service name="LogTestService" provider="java:RPC">
+
+        <!--请求流-->
+        <requestFlow>
+            <handler type="track"/>
+        </requestFlow>
+
+        <parameter name="className" value="com.bingoogol.axisserver.service.HandlerService"/>
+        <parameter name="allowedMethods" value="*"/>
+    </service>
+
+</deployment>
