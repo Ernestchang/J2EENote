@@ -1,19 +1,3 @@
-/**
- * @(#)$CurrentFile
- * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
- *
- *<br> Copyright:  Copyright (c) 2014
- *<br> Company:厦门畅享信息技术有限公司
- *<br> @author bingo
- *<br> 14-1-2 下午8:17
- *<br> @version 1.0
- *————————————————————————————————
- *修改记录
- *    修改者：
- *    修改时间：
- *    修改原因：
- *————————————————————————————————
- */
 package com.bingoogol.axisclient;
 
 import com.bingoogol.axisclient.pojo.Order;
@@ -26,17 +10,6 @@ import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 import java.net.URL;
 
-/**
- * <pre></pre>
- * <br>----------------------------------------------------------------------
- * <br> <b>功能描述:</b>
- * <br>
- * <br> 注意事项:
- * <br>
- * <br>
- * <br>----------------------------------------------------------------------
- * <br>
- */
 public class TestOrder {
     public static void main(String[] args) throws Exception {
         // 调用的ws的方法,返回值是javaObject对象,要求在客户端,必须创建java类型
